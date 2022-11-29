@@ -1,32 +1,22 @@
-$gwrite:white;
-$gblack:black;
-$ggreen:seagreen;
-$gfontSize_norm:2.5vh;
-$gfontSize_light:1.8vh;
-$gfontSize_large:3vh;
-$gfontSize_bigger:3.6vh;
+@import '../../commonScss/common.scss';
+
 @font-face {
     font-family: noise;
     src: url('../../../public/font/Nosifer.ttf');
 }
 
 .warDiv {
-    position: relative;
-    width: 100%;
-    height: 100%;
+    @include commonStyle(relative,100%,100%);
     overflow: hidden;
 }
 
 .warVideo {
-    position: absolute;
+    @include commonStyle(absolute,100%,100%);
     background-color: $gblack;
-    width: 100%;
-    height: 100%;
     object-fit: cover;
     transition: 3s;
     transform: scale(1.2);
     filter: blur(10px);
-
     &:hover {
         transform: scale(1);
         filter: blur(0);
@@ -34,9 +24,7 @@ $gfontSize_bigger:3.6vh;
 }
 
 .title {
-    position: relative;
-    width: 100%;
-    height: 0;
+    @include commonStyle(relative,100%,0);
     top: 150px;
     text-align: center;
     font-size: 8vh;
@@ -46,16 +34,10 @@ $gfontSize_bigger:3.6vh;
     text-shadow: 2px 2px 1px $ggreen;
 }
 
-
 .login {
-    position: absolute;
-    width: 450px;
-    height: 250px;
+    @include commonStyle(absolute,450px,250px);
+    @include commonLocation(0,0,auto,100px);
     margin: auto;
-    left: 0;
-    right: 0;
-    bottom: 100px;
-    // background-color: rgba(255, 255, 255, 0.33);
     border-radius: 15px;
     transform: scale(0.2);
     transition: 1s;
@@ -67,10 +49,8 @@ $gfontSize_bigger:3.6vh;
         font-weight: bolder;
         font-size: 0;
         position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
+        @include commonLocation(0,0,0,0);
+        z-index: 1;
         background-color: $gwrite;
         border: {
             radius: 20%;
@@ -89,19 +69,20 @@ $gfontSize_bigger:3.6vh;
             transform: scale(1);
             background-color: fade-out($gwrite,0.8);
             border: 1px solid fade-out($gblack,1);
+            z-index: -1;
         }
         transform: scale(1);
     }
 }
 
 .head {
-    position: relative;
-    width: 100%;
-    height: 80px;
+    @include commonStyle(relative,100%,80px);
     text-align: center;
     top: 50px;
-    color: royalblue;
-    font-weight: bold;
+    color: $gwrite;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-shadow: 2px 2px 2px $gblack;
+    font-weight: bolder;
     font-size: $gfontSize_norm;
     img {
         height: 80px;
@@ -110,5 +91,104 @@ $gfontSize_bigger:3.6vh;
     }
 }
 .startbut{
-    position: relative;
+    @include commonStyle(relative,100%,50px);
+    border-radius: 10px;
+    top: 25px;
+    button {
+        position: relative;
+        width: 200px;
+        display: inline-block;
+        background-color: $ggreen;
+        height: 100%;
+        border: none;
+        cursor: pointer;
+        filter: url('#gooey');
+        &:last-child {
+            font-size: $gfontSize_large;
+            font-weight: bolder;
+            font-family: noise;
+            text-shadow: 2px 2px 1px $gblack;
+            color: $gwrite;
+            transition: 0.5s;
+            &:hover{
+                text-shadow: 2px 2px 1px $gwrite;
+                color: $gblack;
+            }
+        }
+    }
 }
+
+.svg{
+    position: absolute;
+    display: block;
+}
+.bubbles{
+    position: absolute;
+    @include commonLocation(0,0,0,0);
+}
+$leftList:80% 35% 45% 20% 15% 25% 70% 60% 5% 55% 55%;
+//自定义bubblenthchild样式
+@mixin bubbleChild($leftList){
+    @for $i from 1 through 10 {
+        &:nth-child(#{$i}){
+            left: nth($leftList, $i);
+            animation: #{'move'+$i} #{(3+($i - 1)*0.02)}s infinite;
+            animation-delay: #{$i*0.2}s;
+        }
+    }
+}
+.bubble{
+    @include commonStyle(absolute,20px,20px);
+    top: 0;
+    left: 0;
+    display: block;
+    background-color: $ggreen;
+    border-radius: 100%;
+    @include bubbleChild($leftList);
+}
+
+//自定义动画--解决兼容性问题
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
+
+//定义move动画
+@mixin moveKeyFrames($moveList) {
+    @for $i from 1 through 10 {
+        @include keyframes('move'+$i){
+            0%{
+                transform: translate(0,0);
+            }
+            99%{
+                transform: translate(0,nth($moveList,$i));
+            }
+            100%{
+                transform: translate(0,0);
+                opacity: 0;
+            }
+        }
+    }
+}
+
+// 动画move参数
+$moveList:-105px,-95px,-60px,-90px,-95px,-65px,-110px,-85px,-80px,-125px;
+//引用动画move
+@include moveKeyFrames($moveList);
+
+
+
+
+
+
+
