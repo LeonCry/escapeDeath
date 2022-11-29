@@ -1,0 +1,44 @@
+//定义全局变量
+$gwrite:white;
+$gblack:black;
+$ggreen:seagreen;
+$gfontSize_norm:2.5vh;
+$gfontSize_light:1.8vh;
+$gfontSize_large:3vh;
+$gfontSize_bigger:3.6vh;
+
+//自定义动画--解决兼容性问题
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
+
+//通用格式
+@mixin commonStyle($position:relative,$width,$height) {
+    position: $position;
+    @if $width!=undefined {
+        width: $width;
+    }
+    @if $height!=undefined {
+        height: $height;
+    }
+}
+//通用left right top bottom
+@mixin commonLocation($left:auto,$right:auto,$top:auto,$bottom:auto){
+    left: $left;
+    right: $right;
+    top: $top;
+    bottom: $bottom;
+}
+
+
