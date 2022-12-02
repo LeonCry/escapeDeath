@@ -1,0 +1,5 @@
+@import '../../commonScss/common.scss';
+.main{
+    @include commonStyle(relative,100%,100%);
+    background-color: black;
+}
