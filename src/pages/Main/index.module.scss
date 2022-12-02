@@ -1,5 +1,78 @@
 @import '../../commonScss/common.scss';
+
+
 .main{
     @include commonStyle(relative,100%,100%);
-    background-color: black;
+    background-color: fade-out($gblack, 0.2);
+}
+
+.bacPic{
+    @include commonStyle(absolute,100%,100%);
+    object-fit: cover;
+    animation: blurs 3s forwards ease-in-out;
+    animation-delay: 2s;
+}
+.darker{
+    @include commonStyle(absolute,100%,100%);
+    background-color: rgba(0, 0, 0, 0.0);
+    z-index: 2;
+}
+
+.circleMain{
+    @include commonStyle(absolute,15vh,15vh);
+    @include commonLocation(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0.0);
+    margin: auto;
+    transition: 1s ;
+    background-color: black ;
+    border-radius: 0;
+    border: 5px solid white ;
+    box-shadow: 10px 10px 100px 15px white;
+    animation: circle 6s linear infinite both;
+    &:hover{
+        border: 10px double white ;
+    }
+    // click之后的吧
+    // transform: rotate(1000deg) ;
+    // background-color: rgba(255,255,255,0.5);
+    // border-radius: 50% ;
+    // border: 5px dashed black ;
+    // box-shadow: 10px 10px 100px 1500px rgba(0, 0, 0, 0.55);
+    // animation: circle 1s linear infinite both;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@include keyframes(blurs){
+    0%{
+        filter: blur(0);
+    }
+    20%{
+        filter: blur(10px);
+    }
+    70%{
+        filter: blur(10px);
+    }
+    100%{
+        filter:blur(3px);
+    }
+}
+
+@include keyframes(circle){
+    0%{
+        transform: rotate(0);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
 }
