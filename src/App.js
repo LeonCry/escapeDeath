@@ -1,9 +1,17 @@
 import './App.css';
-import Start from './components/Start';
+import { useRoutes } from "react-router-dom";
+import {Suspense,React} from 'react'
+import routes from './routeTable/routes'
+import Loading from './components/Loading'
 function App() {
+
+  const allRoute = useRoutes(routes);
+
   return (
     <div className="App">
-     <Start/>
+      <Suspense fallback={<Loading/>}>
+        {allRoute}
+     </Suspense>
     </div>
   );
 }
