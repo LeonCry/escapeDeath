@@ -23,7 +23,7 @@
 .innerR{
     @include commonStyle(absolute,2vw,2vw);
     @include commonLocation(0,0,0,0);
-    box-shadow: 10px 10px 8px 1px red;
+    box-shadow: 20px 20px 8px 1px red;
     margin: auto;
     border-radius: 50%;
     animation: innerRFrame 6s cubic-bezier(0.680, -0.550, 0.265, 1.550) both infinite;
@@ -31,7 +31,7 @@
 .innerB{
     @include commonStyle(absolute,2vw,2vw);
     @include commonLocation(0,0,0,0);
-    box-shadow: -10px -10px 8px 1px springgreen;
+    box-shadow: -20px -20px 8px 1px springgreen;
     margin: auto;
     border-radius: 50%;
     border: 3px solid rgba(0, 0, 0, 0);
@@ -45,14 +45,12 @@
     margin: auto;
     color: whitesmoke;
     font-weight: bolder;
-    line-height: 23vh;
+    padding-top: 250px;
     padding-left: 10px;
     font-size: $gfontSize_norm;
     text-shadow:4px 4px 4px $gblack;
     animation: focus-in-expand 2s cubic-bezier(0.680, -0.550, 0.265, 1.550) infinite alternate-reverse both;
 }
-
-
 
 
 @include keyframes(outerLFrame){

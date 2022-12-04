@@ -1,5 +1,96 @@
 @import '../../commonScss/common.scss';
+
+
 .main{
     @include commonStyle(relative,100%,100%);
-    background-color: black;
+    background-color: fade-out($gblack, 0.2);
+    overflow: hidden;
+}
+
+.bacPic{
+    @include commonStyle(absolute,100%,100%);
+    object-fit: cover;
+    animation: blurs 3s forwards ease-in-out;
+    animation-delay: 2s;
+}
+.darker{
+    @include commonStyle(absolute,100%,100%);
+    background-color: rgba(0, 0, 0, 0.0);
+    z-index: 2;
+}
+
+.circleMain{
+    @include commonStyle(absolute,5vh,5vh);
+    @include commonLocation(0,0,0,0);
+    background-color: rgba(0, 0, 0, 0.0);
+    margin: auto;
+    transition: 1.2s;
+    z-index: 4;
+    cursor: pointer;
+}
+.circleMain[data-click=true]{
+    background-color: rgba(255,255,255,0.7);
+    @include commonStyle(absolute,15vh,15vh);
+    border-radius: 50% ;
+    border: 5px dashed black ;
+    box-shadow: 10px 10px 100px 1500px rgba(0, 0, 0, 0.55);
+    animation: circle 1s linear infinite both;
+    &:hover{
+        background-color: black;
+        border: 5px dashed white ;
+        animation: circleHover 1s linear infinite reverse;
+    }
+}
+.circleMain[data-click=false]{
+    background-color: black ;
+    border-radius: 0;
+    border: 5px solid white ;
+    box-shadow: 10px 10px 100px 15px white;
+    animation: circle 8s linear infinite both;
+    &:hover{
+        border: 10px double white ;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@include keyframes(blurs){
+    0%{
+        filter: blur(0);
+    }
+    20%{
+        filter: blur(10px);
+    }
+    70%{
+        filter: blur(10px);
+    }
+    100%{
+        filter:blur(3px);
+    }
+}
+
+@include keyframes(circle){
+    0%{
+        transform: rotate(0);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+@include keyframes(circleHover){
+    0%{
+        transform: rotate(0) scale(1.2);
+    }
+    100%{
+        transform: rotate(360deg) scale(1.2);
+    }
 }

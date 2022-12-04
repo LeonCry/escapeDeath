@@ -1,0 +1,61 @@
+@import '../../commonScss/common.scss';
+
+.card{
+    @include commonStyle(absolute,20vw,30vh);
+    @include commonLocation(0,0,0,0);
+    margin: auto;
+    border: 2px solid white;
+    opacity: 0;
+}
+.inner{
+    @include commonStyle(relative,100%,100%);
+    opacity: 1;
+    cursor: pointer;
+    transition: 0.33s;
+    z-index: 5;
+    &:hover{
+        background-color: white;
+    }
+}
+
+$transX:0 150% 150% 0 -150% -150%;
+$transY:-90% -60% 60% 90% 60% -60%;
+$transMX: -150% 0 150% 150% 0 -150%;
+$transMY: -60% -90% -60% 60% 90% 60%;
+@for $i from 1 through 6 {
+    @include keyframes(card-#{$i}) {
+        0% {
+            transform: translateY(0) translateX(0);
+            opacity: 0;
+        }
+        45%{
+            transform: translateY(nth($transMY,$i)) translateX(nth($transMX,$i));
+            opacity: 0.5;
+        }
+
+        100% {
+            transform: translateY(nth($transY,$i)) translateX(nth($transX,$i));
+            opacity: 1;
+        }
+    }
+    .card[data-deg='#{$i}']{
+        animation: card-#{$i} 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards;
+        animation-delay: #{(0.8 + 0.05 * $i)}s;
+        z-index: 4;
+    }
+
+}
+
+// @include keyframes(flip-2-ver-right-fwd){
+//     0% {
+//                 transform: translateX(0) translateZ(0) rotateY(0);
+//                 transform-origin: 100% 50%;
+
+//       }
+//       100% {
+
+//                 transform: scale(1.5) translateX(100%) translateZ(160px) rotateY(-180deg);
+//                 transform-origin: 0% 50%;
+//       }
+// }
+
