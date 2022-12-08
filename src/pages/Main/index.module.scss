@@ -63,11 +63,6 @@
 
 
 
-
-
-
-
-
 @include keyframes(opacityChange){
     0%{
         opacity: 1;
@@ -99,6 +94,7 @@
     100%{
         transform: rotate(360deg);
     }
+}
 @include keyframes(circleHover){
     0%{
         transform: rotate(0) scale(1.2);
@@ -130,5 +126,4 @@
             transform: rotate($i*15+deg);
         }
     }
-}
 }
