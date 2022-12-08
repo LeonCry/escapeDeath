@@ -1,7 +1,7 @@
 @import '../../commonScss/common.scss';
 
 .card{
-    @include commonStyle(absolute,200px,300px);
+    @include commonStyle(absolute,20vw,30vh);
     @include commonLocation(0,0,0,0);
     margin: auto;
     border: 2px solid white;
@@ -40,7 +40,7 @@ $transMY: -60% -90% -60% 60% 90% 60%;
     }
     .card[data-deg='#{$i}']{
         animation: card-#{$i} 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards;
-        animation-delay: #{(0.05 * $i)}s;
+        animation-delay: #{(0.8 + 0.05 * $i)}s;
         z-index: 4;
     }
 

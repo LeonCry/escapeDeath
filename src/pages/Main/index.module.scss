@@ -4,6 +4,7 @@
 .main{
     @include commonStyle(relative,100%,100%);
     background-color: fade-out($gblack, 0.2);
+    overflow: hidden;
 }
 
 .bacPic{
@@ -36,7 +37,7 @@
     &:hover{
         background-color: black;
         border: 5px dashed white ;
-        animation: circle 1s linear infinite reverse;
+        animation: circleHover 1s linear infinite reverse;
     }
 }
 .circleMain[data-click=false]{
@@ -44,7 +45,7 @@
     border-radius: 0;
     border: 5px solid white ;
     box-shadow: 10px 10px 100px 15px white;
-    animation: circle 6s linear infinite both;
+    animation: circle 8s linear infinite both;
     &:hover{
         border: 10px double white ;
     }
@@ -82,5 +83,12 @@
     }
     100%{
         transform: rotate(360deg);
+    }
+@include keyframes(circleHover){
+    0%{
+        transform: rotate(0) scale(1.2);
+    }
+    100%{
+        transform: rotate(360deg) scale(1.2);
     }
 }
