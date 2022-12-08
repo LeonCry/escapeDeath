@@ -6,7 +6,7 @@ $gfontSize_norm:2.5vh;
 $gfontSize_light:1.8vh;
 $gfontSize_large:3vh;
 $gfontSize_bigger:3.6vh;
-
+$gfont:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 //自定义动画--解决兼容性问题
 @mixin keyframes($animationName) {
     @-webkit-keyframes #{$animationName} {

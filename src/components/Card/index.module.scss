@@ -4,19 +4,72 @@
     @include commonStyle(absolute,20vw,30vh);
     @include commonLocation(0,0,0,0);
     margin: auto;
-    border: 2px solid white;
+    border: 3px solid white;
+    background-color: black;
     opacity: 0;
-}
-.inner{
-    @include commonStyle(relative,100%,100%);
-    opacity: 1;
+    transition: 0.55s;
     cursor: pointer;
-    transition: 0.33s;
-    z-index: 5;
+    text-align: center;
+    img{
+        @include commonStyle(relative,100%,70%);
+        object-fit: cover;
+        transition: 0.22s;
+        opacity: 0.2;
+    }
+    span{
+        @include commonStyle(relative,100%,100%);
+        font-size: $gfontSize_large;
+        color: white;
+        transition: 0.66s;
+        line-height: 250%;
+    }
+    div{
+        @include commonStyle(relative,100%,30%);
+        text-align: left;
+        text-indent:2em;
+        font-size: $gfontSize_light;
+        line-height: 150%;
+        overflow-y: auto;
+        transition: 0.44s;
+        transition-delay: 0.44s;
+        bottom: 50%;
+        opacity: 0;
+        z-index: -1;
+    }
+    button{
+        @include commonStyle(relative,30%,8%);
+        border-radius: 10px;
+        background-color: slategrey;
+        border: 1px solid slategrey;
+        transition: 0.22s;
+        cursor: pointer;
+        color: whitesmoke;
+        bottom: 100%;
+        z-index: -1;
+        opacity: 0;
+        &:hover{
+            color: black;
+            font-weight: bold;
+            transform: skew(-10deg);
+            letter-spacing: 3px;
+            background-color: white;
+            border: 5px solid slategrey;
+        }
+    }
     &:hover{
         background-color: white;
+        border: 3px solid slategrey;
+    }
+    &:hover img{
+        opacity: 1;
+    }
+    &:hover span{
+        color: black;
     }
 }
+
+
+
 
 $transX:0 150% 150% 0 -150% -150%;
 $transY:-90% -60% 60% 90% 60% -60%;
@@ -34,28 +87,73 @@ $transMY: -60% -90% -60% 60% 90% 60%;
         }
 
         100% {
-            transform: translateY(nth($transY,$i)) translateX(nth($transX,$i));
+            transform: translateY(nth($transY,$i)) translateX(nth($transX,$i)) skew(-10deg);
             opacity: 1;
         }
     }
     .card[data-deg='#{$i}']{
+        transition: 0.33s;
         animation: card-#{$i} 1.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) forwards;
         animation-delay: #{(0.8 + 0.05 * $i)}s;
         z-index: 4;
     }
+    //点击之后
+    .card[data-deg='#{$i}'][data-click='1']{
+        opacity: 1;
+        transition: 0.33s;
+        @include commonStyle(absolute,30vw,50vh);
+        animation: none;
+        background-color: white;
+        cursor: default;
+        transform: translateY(0) translateX(0) scale(1.1) skew(-10deg);
+        z-index: 5;
+        img{
+            @include commonStyle(relative,100%,45%);
+            object-fit: cover;
+            transition: 0.33s;
+            transition-delay: 0.33s;
+            opacity: 1;
+        }
+        span{
+            @include commonStyle(relative,100%,100%);
+            font-size: $gfontSize_large;
+            color: black;
+            transition: 0.66s;
+            line-height: 120%;
+            font-weight: bold;
+        }
+        div{
+            bottom: 0;
+            opacity: 1;
+            z-index: 2;
+        }
+        button{
+            bottom: 0;
+            opacity: 1;
+            z-index: 3;
+        }
+    }
+    //默认显示
+    .card[data-deg='#{$i}'][data-click='0']{
+        opacity: 1;
+        transition: 0.33s;
+        @include commonStyle(absolute,20vw,30vh);
+        animation: none;
+        transform: translateY(nth($transY,$i)) translateX(nth($transX,$i)) skew(-10deg);
+        z-index: 5;
 
+    }
+    //隐藏
+    .card[data-deg='#{$i}'][data-click='2']{
+        opacity: 1;
+        transition: 1s;
+        @include commonStyle(absolute,0vw,0vh);
+        animation: none;
+        background-color: white;
+        transform: translateY(nth($transY,$i)) translateX(nth($transX,$i)) skew(-10deg);
+        z-index: 3;
+        span{
+            display: none;
+        }
+    }
 }
-
-// @include keyframes(flip-2-ver-right-fwd){
-//     0% {
-//                 transform: translateX(0) translateZ(0) rotateY(0);
-//                 transform-origin: 100% 50%;
-
-//       }
-//       100% {
-
-//                 transform: scale(1.5) translateX(100%) translateZ(160px) rotateY(-180deg);
-//                 transform-origin: 0% 50%;
-//       }
-// }
-

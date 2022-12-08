@@ -3,16 +3,24 @@
 
 .main{
     @include commonStyle(relative,100%,100%);
-    background-color: fade-out($gblack, 0.2);
+    background-color: fade-out($gblack, 0);
     overflow: hidden;
 }
 
 .bacPic{
     @include commonStyle(absolute,100%,100%);
     object-fit: cover;
-    animation: blurs 3s forwards ease-in-out;
-    animation-delay: 2s;
+    opacity: 1;
+    animation: blurs 2s forwards ease-in-out;
 }
+.bacPic[data-change=true]{
+    animation: opacityChange 0.5s forwards linear;
+}
+
+
+
+
+
 .darker{
     @include commonStyle(absolute,100%,100%);
     background-color: rgba(0, 0, 0, 0.0);
@@ -37,7 +45,7 @@
     &:hover{
         background-color: black;
         border: 5px dashed white ;
-        animation: circleHover 1s linear infinite reverse;
+        animation: circleHover 8s cubic-bezier(0.215, 0.610, 0.355, 1.000) infinite reverse;
     }
 }
 .circleMain[data-click=false]{
@@ -45,7 +53,7 @@
     border-radius: 0;
     border: 5px solid white ;
     box-shadow: 10px 10px 100px 15px white;
-    animation: circle 8s linear infinite both;
+    animation: defaultHover 100s cubic-bezier(0.215, 0.610, 0.355, 1.000) infinite both;
     &:hover{
         border: 10px double white ;
     }
@@ -60,20 +68,27 @@
 
 
 
-
+@include keyframes(opacityChange){
+    0%{
+        opacity: 1;
+    }
+    40%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
 
 @include keyframes(blurs){
     0%{
         filter: blur(0);
     }
-    20%{
-        filter: blur(10px);
-    }
-    70%{
-        filter: blur(10px);
+    50%{
+        filter: blur(4px);
     }
     100%{
-        filter:blur(3px);
+        filter: blur(2px);
     }
 }
 
@@ -91,4 +106,29 @@
     100%{
         transform: rotate(360deg) scale(1.2);
     }
+}
+
+@include keyframes(circleHover){
+    @for $i from 0 through 20 {
+        #{$i * 5}%{
+            transform: rotate($i*15+deg);
+        }
+    }
+}
+
+@include keyframes(defaultHover){
+    @for $i from 0 through 100 {
+        #{$i}%{
+            transform: rotate($i*14.4+deg);
+        }
+    }
+}
+
+@include keyframes(circleHover){
+    @for $i from 0 through 20 {
+        #{$i * 5}%{
+            transform: rotate($i*15+deg);
+        }
+    }
+}
 }
