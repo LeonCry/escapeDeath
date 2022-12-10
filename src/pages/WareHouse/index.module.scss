@@ -1,0 +1,54 @@
+@import '../../commonScss/common.scss';
+@font-face {
+    font-family: shadows;
+    src: url('../../../public/font/Nosifer.ttf');
+}
+//https://flatuicolors.com/palette/tr
+$bacColor:#3d3d3d;
+$secColor:#4b4b4b;
+$hoverColor:fade-out($secColor,0.88);
+.body{
+    @include commonStyle(relative,100%,100%);
+    background-color: $bacColor;
+}
+.title{
+    @include commonStyle(relative,100%,8vh);
+    width: 100%;
+    text-align: center;
+    line-height: 200%;
+    letter-spacing: 20px;
+    @include myFont(shadows,$gfontSize_max,bolder,whitesmoke);
+    text-shadow: 8px 8px 4px black;
+}
+
+.main{
+    @include commonStyle(relative,100%,92vh);
+    display: flex;
+    flex-flow: row nowrap;
+    flex: 10;
+    justify-content: space-around;
+}
+
+
+@mixin leftRightSame{
+    background-color: $secColor;
+    margin: 2vh;
+    border-radius: 15px;
+    transition: 0.33s;
+    box-shadow: 0px 0px 25px 8px fade-out($color: black, $amount: 0.33);
+    &:hover{
+        background-color: $hoverColor;
+    }
+}
+
+.left{
+    @include commonStyle(relative,auto,85vh);
+    flex: 3;
+    @include leftRightSame;
+}
+
+.right{
+    @include commonStyle(relative,auto,85vh);
+    flex: 6;
+    @include leftRightSame;
+}

@@ -4,6 +4,7 @@
 .main{
     @include commonStyle(relative,100%,100%);
     background-color: fade-out($gblack, 0);
+    background-color: fade-out($gblack, 0);
     overflow: hidden;
 }
 
@@ -16,10 +17,6 @@
 .bacPic[data-change=true]{
     animation: opacityChange 0.5s forwards linear;
 }
-
-
-
-
 
 .darker{
     @include commonStyle(absolute,100%,100%);
@@ -35,6 +32,21 @@
     transition: 1.2s;
     z-index: 4;
     cursor: pointer;
+    div{
+        @include commonStyle(absolute,100%,100%);
+        color: whitesmoke;
+        font-size: $gfontSize_small;
+        font-weight: 600;
+        text-align: center;
+        display: inline-block;
+        border-radius: 50%;
+        span{
+            @include commonStyle(absolute,100%,30%);
+            @include commonLocation(0,0,0,0);
+            display: inline-block;
+            margin: auto;
+        }
+    }
 }
 .circleMain[data-click=true]{
     background-color: rgba(255,255,255,0.7);
@@ -42,10 +54,18 @@
     border: 5px dashed black ;
     box-shadow: 10px 10px 100px 1500px rgba(0, 0, 0, 0.55);
     animation: circle 1s linear infinite both;
+    div{
+        color: black;
+        animation: circle 1s linear infinite reverse;
+    }
     &:hover{
         background-color: black;
         border: 5px dashed white ;
         animation: circleHover 8s cubic-bezier(0.215, 0.610, 0.355, 1.000) infinite reverse;
+         div{
+            color: whitesmoke;
+            animation: circleHover2 8s cubic-bezier(0.215, 0.610, 0.355, 1.000) infinite both;
+         }
     }
 }
 .circleMain[data-click=false]{
@@ -54,14 +74,13 @@
     border: 5px solid white ;
     box-shadow: 10px 10px 100px 15px white;
     animation: defaultHover 100s cubic-bezier(0.215, 0.610, 0.355, 1.000) infinite both;
+    div{
+        animation: defaultHover 100s cubic-bezier(0.215, 0.610, 0.355, 1.000) infinite reverse;
+     }
     &:hover{
         border: 10px double white ;
     }
 }
-
-
-
-
 
 @include keyframes(opacityChange){
     0%{
@@ -84,6 +103,7 @@
     }
     100%{
         filter: blur(2px);
+        filter: blur(2px);
     }
 }
 
@@ -95,12 +115,28 @@
         transform: rotate(360deg);
     }
 }
-@include keyframes(circleHover){
-    0%{
-        transform: rotate(0) scale(1.2);
+
+@include keyframes(defaultHover){
+    @for $i from 0 through 100 {
+        #{$i}%{
+            transform: rotate($i*14.4+deg);
+        }
     }
-    100%{
-        transform: rotate(360deg) scale(1.2);
+}
+
+
+@include keyframes(circleHover){
+    @for $i from 0 through 20 {
+        #{$i * 5}%{
+            transform: rotate($i*15+deg);
+        }
+    }
+}
+@include keyframes(circleHover2){
+    @for $i from 0 through 20 {
+        #{$i * 5}%{
+            transform: rotate(($i+3.5)*15+deg);
+        }
     }
 }
 
