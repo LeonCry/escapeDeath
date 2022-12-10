@@ -3,7 +3,6 @@ import  {useNavigate} from 'react-router-dom'
 import pubsub from 'pubsub-js'
 import style from './index.module.scss'
 
-
   const Card:React.FC<any> = (props) => {
   //   interface gameCardTP{
   //   id:number;
@@ -49,12 +48,6 @@ import style from './index.module.scss'
 
 
   return (
-    <div className={style.card} data-deg={item.id} onMouseEnter={changeBG} onClick = {()=>clickFirst(first)} data-click={first}>
-      <img src={item.picStr} alt="pic" />
-      <span>{item.name}</span>
-      <br />
-      <div>{item.intro}</div>
-      <button onClick={butClick}>进入{item.name}</button>
     <div className={style.card} data-deg={item.id} onMouseEnter={changeBG} onClick = {()=>clickFirst(first)} data-click={first}>
       <img src={item.picStr} alt="pic" />
       <span>{item.name}</span>
