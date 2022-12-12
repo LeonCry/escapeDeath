@@ -15,12 +15,12 @@ const Main:React.FC = () => {
   }
   
   const gameCard:gameCardTP[] = [
-    {id:1,name:'仓库',picStr:'picture/warestore.jpg',path:'null',intro:'用于储存装备和物品。仓库大小有限，可以扩充但要付出昂贵的代价。'},
-    {id:2,name:'小酒馆',picStr:'picture/winkBar.jpg',path:'null',intro:'用于恢复体力。一杯酒足以让你清醒一整天，赛马和幸运转盘或许也是赚钱的好方法。'},
-    {id:3,name:'跳蚤市场',picStr:'picture/swarmp.jpg',path:'null',intro:'用于交换物品和买卖。你想买什么或者你想卖什么？'},
-    {id:4,name:'藏身处',picStr:'picture/room.jpg',path:'null',intro:'用于锻炼角色。'},
-    {id:5,name:'图鉴',picStr:'picture/picjueg.jpg',path:'null',intro:'用于鉴赏已发现的物品和装备。'},
-    {id:6,name:'设置',picStr:'picture/setting.jpg',path:'null',intro:'进行游戏设置。'},
+    {id:1,name:'仓库',picStr:'picture/warestore.jpg',path:'/wareHouse',intro:'用于储存装备和物品。仓库大小有限，可以扩充但要付出昂贵的代价。'},
+    {id:2,name:'小酒馆',picStr:'picture/winkBar.jpg',path:'/winkBar',intro:'用于恢复体力。一杯酒足以让你清醒一整天，赛马和幸运转盘或许也是赚钱的好方法。'},
+    {id:3,name:'跳蚤市场',picStr:'picture/swarmp.jpg',path:'/fleaMarket',intro:'用于交换物品和买卖。你想买什么或者你想卖什么？'},
+    {id:4,name:'藏身处',picStr:'picture/room.jpg',path:'/refuge',intro:'用于锻炼角色。'},
+    {id:5,name:'图鉴',picStr:'picture/picjueg.jpg',path:'/atlas',intro:'用于鉴赏已发现的物品和装备。'},
+    {id:6,name:'设置',picStr:'picture/setting.jpg',path:'/setting',intro:'进行游戏设置。'},
   ]
 
   let [circleClick,setCircle]:[boolean,Function] = React.useState(false);
@@ -54,7 +54,6 @@ const Main:React.FC = () => {
     }
     else{
       setCircle(false);
-      console.log("进入游戏...");
     }
   }
 
@@ -71,7 +70,11 @@ const Main:React.FC = () => {
       <img className={style.bacPic} src={bg} alt="bacPic" data-change={classChange} />
       <div className={style.darker} id='darker' onClick={(e)=>{cancle(e)}}>
 
-      <div className={style.circleMain} data-click={circleClick} onClick={()=>enterSelect(circleClick)}></div>
+      <div className={style.circleMain} data-click={circleClick} onClick={()=>enterSelect(circleClick)}>
+        <div>
+          <span>暂无活动</span>
+        </div>
+      </div>
       {
         circleClick?gameCard.map((item)=><Card item={item}  key={item.id}></Card>):null
       }

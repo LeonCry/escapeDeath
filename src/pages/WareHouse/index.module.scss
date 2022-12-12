@@ -1,0 +1,363 @@
+@import '../../commonScss/common.scss';
+@font-face {
+    font-family: shadows;
+    src: url('../../../public/font/Nosifer.ttf');
+}
+@include scrollbar;
+//https://flatuicolors.com/palette/tr
+$bacColor:#3d3d3d;
+$hoverColor:#4b4b4b;
+$secColor:fade-out($hoverColor,0.88);
+$boxColor:slategray;
+$boxHColor:slateblue;
+
+
+.body{
+    @include commonStyle(relative,100%,100%);
+    background-color: $bacColor;
+}
+.title{
+    @include commonStyle(relative,100%,8vh);
+    width: 100%;
+    text-align: center;
+    line-height: 200%;
+    letter-spacing: 20px;
+    @include myFont(shadows,$gfontSize_max,bolder,whitesmoke);
+    text-shadow: 8px 8px 4px black;
+}
+
+.main{
+    @include commonStyle(relative,100%,92vh);
+    display: flex;
+    flex-flow: row nowrap;
+    flex: 10;
+    justify-content: space-around;
+    overflow: auto;
+}
+
+
+@mixin leftRightSame{
+    background-color: $secColor;
+    margin: 2vh;
+    border-radius: 15px;
+    transition: 0.33s;
+    box-shadow: 0px 0px 15px 4px fade-out($color: black, $amount: 0.33);
+    &:hover{
+        background-color: $hoverColor;
+    }
+}
+
+
+
+
+.left{
+    @include commonStyle(relative,auto,85vh);
+    min-width: 400px;
+    min-height: 630px;
+    @include leftRightSame;
+    background-color: rgba(48, 48, 48, 1);
+    &:hover{
+        background-color:rgba(48, 48, 48, 1);
+    }
+    img{
+        @include commonStyle(relative,auto,100%);
+        object-fit: cover;
+    }
+}
+.division{
+    @include commonStyle(absolute,100%,100%);
+    z-index: 2;
+    > div{
+        @include commonStyle(relative,auto,auto);
+        color: rgba(255, 255, 255, 0.5);
+        margin-top: 5px;
+        margin-bottom: 5px;
+        // border: 1px solid saddlebrown;
+    }
+    > :nth-of-type(1){
+        width: 100%;
+        height: 2%;
+    }
+    > :nth-of-type(2){
+        width: 100%;
+        height: 13%;
+        > :nth-child(1){
+            left: 15%;
+        }
+        > :nth-child(2){
+            left: 20%;
+        }
+        > :nth-child(3){
+            left: 25%;
+        }
+    }
+    > :nth-of-type(3){
+        width: 100%;
+        height: 13%;
+        > :nth-child(1){
+            left: 20%;
+        }
+        > :nth-child(2){
+            left: 20%;
+        }
+        > :nth-child(3){
+            left: 20%;
+        }
+    }
+    > :nth-of-type(4){
+        width: 100%;
+        height: 13%;
+        > :nth-child(1){
+            left: 10%;
+        }
+        > :nth-child(2){
+            top: 30%;
+            left: 20%;
+        }
+        > :nth-child(3){
+            left: 30%;
+        }
+    }
+    > :nth-of-type(5){
+        width: 100%;
+        height: 13%;
+        > :nth-child(2){
+            left: 60%;
+        }
+    }
+    > :nth-of-type(6){
+        width: 100%;
+        height: 13%;
+        > :nth-child(1){
+            left: 30%;
+        }
+        > :nth-child(2){
+            left: 30%;
+        }
+    }
+    > :nth-of-type(7){
+        width: 100%;
+        height: 13%;
+        > :nth-child(1){
+            left: 28%;
+        }
+        > :nth-child(2){
+            left: 32%;
+        }
+    }
+    > :nth-of-type(8){
+        width: 100%;
+        height: 10%;
+        > :nth-child(1){
+            left: 26%;
+        }
+        > :nth-child(2){
+            left: 34%;
+        }
+    }
+}
+.equment{
+    @include commonStyle(relative,10vh,10vh);
+    background-color: fade-out($boxColor, 0.77);
+    display: inline-block;
+    border: 1px $boxColor solid;
+    transition: 0.22s;
+    text-align: center;
+    margin: 5px;
+    &:hover{
+        background-color: fade-out($boxHColor, 0.77);
+        border: 1px $boxHColor dashed;
+    }
+}
+
+
+
+
+
+
+
+.mid{
+    @include commonStyle(relative,300px,85vh);
+    min-width: 300px;
+    min-height: 630px;
+    @include leftRightSame;
+    overflow-y: auto;
+    color: white;
+     > div{
+        left: 5%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border: 2px solid $boxColor;
+        background-color: fade-out($boxColor, 0.77);
+        transition: 0.22s;
+        overflow-y: hidden;
+        &:hover{
+            border: 2px solid $boxHColor;
+            background-color: fade-out($boxHColor, 0.77);
+            overflow-y: auto;
+        }
+     }
+     > :nth-of-type(1){
+        @include commonStyle(relative,90%,200px);
+        > span{
+            font-size:1.8vh;
+            font-weight: 1000;
+            margin:8px;
+            transition: 0.22s;
+            padding-left: 2px;
+            padding-right: 2px;
+            cursor: default;
+            &:hover{
+                color: black;
+                background-color: snow;
+            }
+        }
+     }
+     > :nth-of-type(2){
+        @include commonStyle(relative,90%,320px);
+        color: fade-out(darkgray,0.5);
+        font-weight: 100;
+        > :nth-of-type(1){
+            @include commonStyle(relative,100%,158px);
+            border-bottom: 2px solid slategray;
+            transition: 0.22s;
+            div{
+                @include commonStyle(relative,90%,120px);
+                margin-top: 10px;
+                left: 5%;
+                border: salmon dotted 1px;
+                transition: 0.22s;
+                &:hover{
+                    background-color: fade-out(salmon,0.8);
+                    border: salmon solid 1px;
+                }
+                img{
+                    @include commonStyle(absolute,100%,100%);
+                    object-fit: cover;
+                }
+            }
+        }
+        > :nth-of-type(2){
+            @include commonStyle(relative,100%,158px);
+            border-top: 2px solid slategray;
+            transition: 0.22s;
+            div{
+                @include commonStyle(relative,90%,120px);
+                margin-top: 10px;
+                left: 5%;
+                border: salmon dotted 1px;
+                transition: 0.22s;
+                &:hover{
+                    background-color: fade-out(salmon,0.8);
+                    border: salmon solid 1px;
+                }
+                img{
+                    @include commonStyle(absolute,100%,100%);
+                    object-fit: cover;
+                }
+            }
+        }
+     }
+     > :nth-of-type(3){
+        @include commonStyle(relative,90%,260px);
+        color: fade-out(darkgray,0.5);
+        font-weight: 100;
+
+     }
+     > :nth-of-type(4){
+        @include commonStyle(relative,90%,300px);
+        color: fade-out(darkgray,0.5);
+        font-weight: 100;
+     }
+     > :nth-of-type(5){
+        @include commonStyle(relative,90%,140px);
+        color: fade-out(darkgray,0.5);
+        font-weight: 100;
+     }
+}
+.hasprocess{
+    @include commonStyle(absolute,60px,10px);
+    // bottom: 1px;
+    display: inline-block;
+    background-color: palevioletred;
+    z-index: 2;
+    text-align: center;
+    font-size: 1px;
+    font-weight: 100;
+    transition: 0.22s;
+   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.allprocess{
+    @include commonStyle(absolute,100px,10px);
+    border: 1px solid snow;
+    padding-left: 0;
+    display: inline-block;
+    background-color: darkgray;
+    transition: 0.22s;
+    &:hover{
+        .hasprocess{
+            background-color: slateblue;
+            color: lightskyblue;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+.right{
+    @include commonStyle(relative,720px,85vh);
+    min-width: 720px;
+    @include leftRightSame;
+    border-radius: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    // background-color: crimson
+}
+
+.contain{
+    @include commonStyle(absolute,720px,auto);
+    min-height: 630px;
+    display: grid;
+    grid-template-columns: repeat(12,59.3px);
+    grid-template-rows: repeat(60,59.3px);
+}
+.walletContain{
+    @include commonStyle(absolute,90%,100%);
+    left: 5%;
+    display: grid;
+    grid-template-columns: repeat(4,59.3px);
+    grid-template-rows: repeat(20,59.3px);
+}
+.insuranceContain{
+    @include commonStyle(absolute,90%,100%);
+    left: 5%;
+    display: grid;
+    grid-template-columns: repeat(4,59.3px);
+    grid-template-rows: repeat(4,59.3px);
+}
+
+
+.grid[data-place=true]{
+    background-color: fade-out(slategray,0.9);
+    border: 1px solid fade-out(white,0.8);
+}
+.grid[data-place=false]{
+    background-color: fade-out(crimson,0.66);
+    border: 1px solid fade-out(crimson,0.2);
+}
+
+
+.text{
+    border: 1px dotted whitesmoke;
+    background-color: purple;
+    background-color: fade-out(purple,0.4);
+    @include commonStyle(absolute,#{(4*59.5)}px,#{(2*59.5)}px);
+}

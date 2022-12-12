@@ -1,10 +1,9 @@
 @import '../../commonScss/common.scss';
 
 @font-face {
-    font-family: noise;
+    font-family: shadows;
     src: url('../../../public/font/Nosifer.ttf');
 }
-
 .warDiv {
     @include commonStyle(relative,100%,100%);
     overflow: hidden;
@@ -54,7 +53,7 @@
     @include commonStyle(relative,100%,0);
     top: 150px;
     text-align: center;
-    font-family: noise;
+    font-family: shadows;
     transition: 1s;
     z-index: 10;
 }
@@ -83,7 +82,7 @@
         content: 'BETA';
         color: $ggreen;
         text-align: center;
-        font-family: noise;
+        font-family: shadows;
         font-weight: bolder;
         font-size: 0;
         position: absolute;
@@ -144,7 +143,7 @@
         &:last-child {
             font-size: $gfontSize_large;
             font-weight: bolder;
-            font-family: noise;
+            font-family: shadows;
             text-shadow: 4px 4px 4px $gwrite;
             color: $gblack;
             // transition: 0.5s;

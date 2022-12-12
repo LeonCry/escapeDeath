@@ -4,8 +4,10 @@ $gblack:black;
 $ggreen:seagreen;
 $gfontSize_norm:2.5vh;
 $gfontSize_light:1.8vh;
+$gfontSize_small:2.2vh;
 $gfontSize_large:3vh;
 $gfontSize_bigger:3.6vh;
+$gfontSize_max:5.2vh;
 $gfont:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 //自定义动画--解决兼容性问题
 @mixin keyframes($animationName) {
@@ -22,7 +24,6 @@ $gfont:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
         @content;
     }
 }
-
 //通用格式
 @mixin commonStyle($position:relative,$width,$height) {
     position: $position;
@@ -40,13 +41,59 @@ $gfont:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     top: $top;
     bottom: $bottom;
 }
-
-@mixin myAfter {
+//通用after
+@mixin myAfter{
     &::after{
         content: '';
+        @include commonStyle(absolute,100%,100%);
         @include commonLocation(0,0,0,0);
         position: absolute;
         margin: auto;
         @content;
     }
 }
+//通用字体设置
+@mixin myFont($font:$gfont,$size:1.8vh,$weight:500,$color:black){
+    font-family: $font;
+    font-size: $size;
+    font-weight: $weight;
+    color: $color;
+}
+
+@mixin scrollbar{
+    ::-webkit-scrollbar {
+        /*滚动条整体样式*/
+        width : 5px;  /*高宽分别对应横竖滚动条的尺寸*/
+        height: 1px;
+        border-radius: 100px;
+        }
+        ::-webkit-scrollbar-thumb {
+        /*滚动条里面小方块*/
+        border-radius   : 100px;
+        background-color: slategrey;
+        background-image: -webkit-linear-gradient(
+            45deg,
+            rgba(255, 255, 255, 0.2) 25%,
+            transparent 25%,
+            transparent 50%,
+            rgba(255, 255, 255, 0.5) 50%,
+            rgba(255, 255, 255, 0.2) 75%,
+            transparent 75%,
+            transparent
+        );
+        }
+        ::-webkit-scrollbar-track {
+        /*滚动条里面轨道*/
+        box-shadow   : inset 0 0 15px rgba(0, 0, 0, 1);
+        background   : #ededed;
+        border-radius: 100px;
+        }
+}
+
+//自定义字体
+// @mixin shadowFont($name){
+//     @font-face {
+//         font-family: shadows;
+//         src: url('../../public/font/Nosifer.ttf');
+//     }
+// }

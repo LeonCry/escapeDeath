@@ -1,4 +1,5 @@
 import React from 'react'
+import  {useNavigate} from 'react-router-dom'
 import pubsub from 'pubsub-js'
 import style from './index.module.scss'
 
@@ -9,6 +10,7 @@ import style from './index.module.scss'
   //   picStr:string;
   //   path:string;
   // }
+    const history = useNavigate();
     const {item} = props;
     // 0在边上显示 1在中间显示 2取消显示
     let [first,setFirst]:[number,Function] = React.useState(-1);
@@ -39,9 +41,9 @@ import style from './index.module.scss'
       }
     }
 
-    //按钮点击事件
+    //按钮点击事件：跳转页面
     function butClick():void{
-      console.log('ccc');
+      history(item.path);
     }
 
 
