@@ -3,10 +3,15 @@
     font-family: shadows;
     src: url('../../../public/font/Nosifer.ttf');
 }
+@include scrollbar;
 //https://flatuicolors.com/palette/tr
 $bacColor:#3d3d3d;
-$secColor:#4b4b4b;
-$hoverColor:fade-out($secColor,0.88);
+$hoverColor:#4b4b4b;
+$secColor:fade-out($hoverColor,0.88);
+$boxColor:slategray;
+$boxHColor:slateblue;
+
+
 .body{
     @include commonStyle(relative,100%,100%);
     background-color: $bacColor;
@@ -27,6 +32,7 @@ $hoverColor:fade-out($secColor,0.88);
     flex-flow: row nowrap;
     flex: 10;
     justify-content: space-around;
+    overflow: hidden;
 }
 
 
@@ -43,12 +49,197 @@ $hoverColor:fade-out($secColor,0.88);
 
 .left{
     @include commonStyle(relative,auto,85vh);
-    flex: 3;
+    min-width: 400px;
     @include leftRightSame;
+    background-color: rgba(48, 48, 48, 1);
+    &:hover{
+        background-color:rgba(48, 48, 48, 1);
+    }
+    img{
+        @include commonStyle(relative,auto,100%);
+        object-fit: cover;
+    }
+}
+.division{
+    @include commonStyle(absolute,100%,100%);
+    z-index: 2;
+    > div{
+        @include commonStyle(relative,auto,auto);
+        margin-top: 5px;
+        margin-bottom: 5px;
+        // border: 1px solid saddlebrown;
+    }
+    > :nth-of-type(1){
+        width: 100%;
+        height: 2%;
+    }
+    > :nth-of-type(2){
+        width: 100%;
+        height: 13%;
+        > :nth-child(1){
+            left: 15%;
+        }
+        > :nth-child(2){
+            left: 19.5%;
+        }
+        > :nth-child(3){
+            left: 25%;
+        }
+    }
+    > :nth-of-type(3){
+        width: 100%;
+        height: 13%;
+        > :nth-child(1){
+            left: 20%;
+        }
+        > :nth-child(2){
+            left: 20%;
+        }
+        > :nth-child(3){
+            left: 20%;
+        }
+    }
+    > :nth-of-type(4){
+        width: 100%;
+        height: 13%;
+        > :nth-child(1){
+            left: 10%;
+        }
+        > :nth-child(2){
+            top: 30%;
+            left: 20%;
+        }
+        > :nth-child(3){
+            left: 30%;
+        }
+    }
+    > :nth-of-type(5){
+        width: 100%;
+        height: 13%;
+        > :nth-child(2){
+            left: 60%;
+        }
+    }
+    > :nth-of-type(6){
+        width: 100%;
+        height: 13%;
+        > :nth-child(1){
+            left: 30%;
+        }
+        > :nth-child(2){
+            left: 30%;
+        }
+    }
+    > :nth-of-type(7){
+        width: 100%;
+        height: 13%;
+        > :nth-child(1){
+            left: 28%;
+        }
+        > :nth-child(2){
+            left: 32%;
+        }
+    }
+    > :nth-of-type(8){
+        width: 100%;
+        height: 10%;
+        > :nth-child(1){
+            left: 26%;
+        }
+        > :nth-child(2){
+            left: 34%;
+        }
+    }
+}
+.equment{
+    @include commonStyle(relative,10vh,10vh);
+    background-color: fade-out($boxColor, 0.77);
+    display: inline-block;
+    border: 1px $boxColor solid;
+    transition: 0.22s;
+    text-align: center;
+    margin: 5px;
+    &:hover{
+        background-color: fade-out($boxHColor, 0.77);
+        border: 1px $boxHColor dashed;
+    }
+}
+
+
+.mid{
+    @include commonStyle(relative,300px,85vh);
+    min-width: 300px;
+    @include leftRightSame;
+    overflow-y: auto;
+    color: white;
+     > div{
+        left: 5%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border: 2px solid $boxColor;
+        background-color: fade-out($boxColor, 0.77);
+        transition: 0.22s;
+        overflow-y: auto;
+        &:hover{
+            border: 2px solid $boxHColor;
+            background-color: fade-out($boxHColor, 0.77);
+        }
+        > span{
+            font-size:2vh;
+            font-weight: 1000;
+            margin:8px;
+            transition: 0.22s;
+            padding-left: 2px;
+            padding-right: 2px;
+            &:hover{
+                color: black;
+                background-color: snow;
+            }
+        }
+     }
+     > :nth-of-type(1){
+        @include commonStyle(relative,90%,200px);
+     }
+     > :nth-of-type(2){
+        @include commonStyle(relative,90%,180px);
+     }
+     > :nth-of-type(3){
+        @include commonStyle(relative,90%,150px);
+     }
+     > :nth-of-type(4){
+        @include commonStyle(relative,90%,300px);
+     }
+}
+.hasprocess{
+    @include commonStyle(absolute,60px,10px);
+    // bottom: 1px;
+    display: inline-block;
+    background-color: crimson;
+    z-index: 2;
+    text-align: center;
+    font-size: 1px;
+    font-weight: 100;
+    transition: 0.22s;
+   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.allprocess{
+    @include commonStyle(absolute,100px,10px);
+    border: 1px solid snow;
+    padding-left: 0;
+    display: inline-block;
+    background-color: darkgray;
+    transition: 0.22s;
+    &:hover{
+        .hasprocess{
+            background-color: slateblue;
+            color: lightskyblue;
+        }
+    }
 }
 
 .right{
     @include commonStyle(relative,auto,85vh);
-    flex: 6;
+    flex: 1;
     @include leftRightSame;
 }
+
