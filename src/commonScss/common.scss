@@ -64,28 +64,29 @@ $gfont:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
     ::-webkit-scrollbar {
         /*滚动条整体样式*/
         width : 5px;  /*高宽分别对应横竖滚动条的尺寸*/
-        height: 1px;
+        height: 10px;
         border-radius: 100px;
         }
         ::-webkit-scrollbar-thumb {
         /*滚动条里面小方块*/
         border-radius   : 100px;
-        background-color: slategrey;
-        background-image: -webkit-linear-gradient(
-            45deg,
-            rgba(255, 255, 255, 0.2) 25%,
-            transparent 25%,
-            transparent 50%,
-            rgba(255, 255, 255, 0.5) 50%,
-            rgba(255, 255, 255, 0.2) 75%,
-            transparent 75%,
-            transparent
-        );
+        border: 1px dotted slateblue;
+        background-color: dimgray;
+        // background-image: -webkit-linear-gradient(
+        //     45deg,
+        //     rgba(72, 14, 148, 0.521) 25%,
+        //     transparent 25%,
+        //     transparent 50%,
+        //     rgba(25, 192, 10, 0.5) 50%,
+        //     rgba(224, 13, 13, 0.582) 75%,
+        //     transparent 75%,
+        //     transparent
+        // );
         }
         ::-webkit-scrollbar-track {
         /*滚动条里面轨道*/
         box-shadow   : inset 0 0 15px rgba(0, 0, 0, 1);
-        background   : #ededed;
+        background   : #bebebe;
         border-radius: 100px;
         }
 }

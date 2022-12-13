@@ -8,4 +8,7 @@ declare module '*.png';
 declare module '*.jpg';
 declare module '*.jpeg';
 declare module '*.gif';
-declare module 'pubsub-js'
+declare module 'pubsub-js';
+declare module 'three'
+declare module 'three/examples/jsm/controls/OrbitControls'
+declare module 'three/examples/jsm/loaders/GLTFLoader.js'
