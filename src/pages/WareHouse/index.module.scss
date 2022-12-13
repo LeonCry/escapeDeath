@@ -334,7 +334,7 @@ $boxHColor:slateblue;
     left: 5%;
     display: grid;
     grid-template-columns: repeat(4,59.3px);
-    grid-template-rows: repeat(20,59.3px);
+    grid-template-rows: repeat(8,59.3px);
 }
 .insuranceContain{
     @include commonStyle(absolute,90%,100%);

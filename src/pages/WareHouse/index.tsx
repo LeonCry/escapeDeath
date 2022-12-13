@@ -4,7 +4,7 @@ export default function WareHouse() {
 
   let [boxSize,setBoxSizeFn]:[Array<number>,Function] = React.useState(new Array(720).fill(0));
   let [hasboxSize,setHasBoxSizeFn]:[number,Function] = React.useState(360);
-  let [wallt,setWallt]:[Array<number>,Function] = React.useState(new Array(80).fill(0));
+  let [wallt,setWallt]:[Array<number>,Function] = React.useState(new Array(32).fill(0));
   let [hasWallt,setHasWallt]:[number,Function] = React.useState(16);
   let [insurance,setInsurance]:[Array<number>,Function] = React.useState(new Array(16).fill(0));
   let [hasInsurance,setHasInsurance]:[number,Function] = React.useState(8);

@@ -1,0 +1,94 @@
+@import '../../commonScss/common.scss';
+@include scrollbar;
+.body{
+    @include commonStyle(absolute,480px,520px);
+    @include commonLocation(0,0,0,0);
+    margin: auto;
+    border: 6px double slateblue;
+    background-color: fade-out(black, 0.66);
+    color: whitesmoke;
+    >:nth-of-type(3){
+        @include commonStyle(relative,100%,25px);
+        font-size: 25px;
+        font-weight: bolder;
+        text-align: center;
+    }
+    >:nth-of-type(4){
+        @include commonStyle(relative,95%,50px);
+        margin-top: 25px;
+        font-size: 16px;
+        font-weight: bold;
+        left: 2.5%;
+        text-align: center;
+        overflow: auto;
+        span{
+            background-color: slateblue;
+            color: white;
+            margin-left: 2.5px;
+            margin-right: 2.5px;
+            padding: 5px;
+            transition: 0.2s;
+            &:hover{
+                background-color: snow;
+                color: black;
+            }
+        }
+    }
+    >:nth-of-type(5){
+        @include commonStyle(relative,90%,180px);
+        font-size: 14px;
+        font-weight: 100;
+        font-size: $gfontSize_light;
+        font-weight: 200;
+        left: 5%;
+        text-indent: 2em;
+        overflow: auto;
+    }
+}
+
+
+.container{
+    @include commonStyle(relative,480px,220px);
+    font-size: $gfontSize_norm;
+    border-bottom: 6px double slateblue;
+}
+.quit{
+    @include commonStyle(absolute,30px,30px);
+    right: -18px;
+    top: -18px;
+    cursor: pointer;
+    z-index: 2;
+    background-color: slateblue;
+    color: whitesmoke;
+    font-weight: bolder;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 20px;
+    border-radius: 50%;
+    border: 4px solid slateblue;
+    transition: 0.22s;
+    &:hover{
+        background-color: white;
+        color: black;
+    }
+}
+
+.move{
+    @include commonStyle(absolute,20px,20px);
+    left: -18px;
+    top: -18px;
+    cursor: move;
+    z-index: 2;
+    background-color: slateblue;
+    color: whitesmoke;
+    font-weight: bolder;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size:18px;
+    border-radius: 50%;
+    border: 4px solid slateblue;
+    transition: 0.22s;
+    &:hover{
+        background-color: white;
+        color: black;
+    }
+    text-align: center;
+}
