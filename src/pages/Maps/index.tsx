@@ -1,4 +1,5 @@
 import React from 'react'
+import NCroll from '../../components/NCroll'
 import style from './index.module.scss'
 export default function Maps() {
   let [a,b]:[number,Function] = React.useState(12);

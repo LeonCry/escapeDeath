@@ -1,4 +1,3 @@
-@import '../../commonScss/common.scss';
 
 .text{
     @include commonStyle(absolute,#{(4*59.5)}px,#{(2*59.5)}px);
