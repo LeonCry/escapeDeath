@@ -1,0 +1,22 @@
+@import '../../commonScss/common.scss';
+.body{
+    @include commonStyle(relative,auto,20px);
+    cursor: default;
+    font-size: 16px;
+    overflow: hidden;
+    display: inline-block;
+    span{
+        @include commonStyle(relative,8px,auto);
+        writing-mode:vertical-lr;
+        text-orientation:upright;
+        color: white;
+        left: -8px;
+        transition: 0.66s;
+    }
+    
+    @for $i from 0 through 9{
+        span[data-number='#{$i}']{
+            transform: translateY(#{-21*$i}px);
+        }
+    }
+}

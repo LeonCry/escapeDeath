@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import pubsub from 'pubsub-js'
 import style from './index.module.scss'
 import * as THREE from 'three'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
@@ -8,6 +9,9 @@ import Galaxy from "../../skybox/acc.jpg";
 
 export default class ThreeD extends Component {
 
+
+    //使用我封装的3D 还是 iframe引入 ？
+    isMyThreeD = false;
 
     repeatRender(mouseControls:any,renderer:any,scene:any,camera:any) {
         //请求动画帧，屏幕每刷新一次调用一次，绑定屏幕刷新频率
@@ -19,8 +23,8 @@ export default class ThreeD extends Component {
 
     createThreeD(){
         let scene = new THREE.Scene(); //新建场景
-        let width = 480; //窗口宽度
-        let height = 220; //窗口高度
+        let width = 600; //窗口宽度
+        let height = 320; //窗口高度
         let k = width / height; //窗口宽高比
         let camera = new THREE.PerspectiveCamera(75, k, 0.1, 1000); //透视相机
         camera.position.set(0, 0, 25); //设置相机位置
@@ -91,7 +95,7 @@ export default class ThreeD extends Component {
 
         let loader = new GLTFLoader();
         //此路径是相当对于public中index.html的，模型必须放在public路径下
-        loader.load("module/katana_low_poly.glb", (gltf:any) => {
+        loader.load("module/the_hornet_military_helmet.glb", (gltf:any) => {
           gltf.scene.position.set(0, 0, 0);
           scene.add(gltf.scene);
           this.changeAngle(camera,gltf.scene,OrbitControls,renderer);
@@ -126,36 +130,75 @@ export default class ThreeD extends Component {
       // controls.target = lookPos;
     }
 
+    //卸载本组件
+    unmountThis(){
+        pubsub.publish('decreseInfo',{id:1});
+    }
 
 
 
     componentDidMount(): void {
+      if (this.isMyThreeD) {
         this.createThreeD();
+      }
     }
+
   render() {
     return (
-      <div className={style.body}>
-        <button className={style.quit}> X </button>
+      <div className={style.body} data-level={4}>
+        <button className={style.quit} onClick={this.unmountThis}> X </button>
         <div className={style.move}> ↖ </div>
-        <div className={style.container} id='container'></div>
-        <div><span>酒瓶子</span></div>
-        <div>
-          <span>水分-50</span><span>清醒-100</span>
-          <span>理智-100</span><span>猝死+10%</span>
-          <span>记忆-50</span>
-          <br /><br />
-
-        
-        </div>
-        <div><span>
-        酒瓶子是用来承酒的。酒瓶子是用来承酒的。酒瓶子是用来承酒的。
-        酒瓶子是用来承酒的。酒瓶子是用来承酒的。酒瓶子是用来承酒的。酒瓶子是用来承酒的。酒瓶子是用来承酒的。
-        酒瓶子是用来承酒的。酒瓶子是用来承酒的。酒瓶子是用来承酒的。酒瓶子是用来承酒的。酒瓶子是用来承酒的。
-        酒瓶子是用来承酒的。酒瓶子是用来承酒的。酒瓶子是用来承酒的。酒瓶子是用来承酒的。酒瓶子是用来承酒的。
-        酒瓶子是用来承酒的。酒瓶子是用来承酒的。酒瓶子是用来承酒的。酒瓶子是用来承酒的。酒瓶子是用来承酒的。
-        酒瓶子是用来承酒的。酒瓶子是用来承酒的。酒瓶子是用来承酒的。酒瓶子是用来承酒的。酒瓶子是用来承酒的。
-        </span></div>
-        
+          <div className={style.left}>
+              <div>
+                {/* 配件 */}
+                <div className={style.aided}>
+                  <div>瞄准镜</div>
+                  <div>枪管</div>
+                  <div>激光瞄准</div>
+                  <div>弹匣</div>
+                  <div>枪托</div>
+                  <div>握把</div>
+                </div>
+                {
+                  this.isMyThreeD?<div className={style.container} id='container'></div>:
+                  <iframe
+                  title='xxx'
+                  frameBorder={0}
+                  // allowFullScreen = {true}
+                  // allow="autoplay; fullscreen; xr-spatial-tracking" 
+                  // xr-spatial-tracking = {true}
+                  // execution-while-out-of-viewport  = {true}
+                  // execution-while-not-rendered = {true}
+                  // web-share  = {true}
+                  src="https://sketchfab.com/models/a16768f0ffa24737a4fe324a411cfbd9/embed?autostart=1"> 
+                 </iframe>
+                }
+              </div>
+              <div><span className={style.levelSpan} data-level={4}>MP5</span></div>
+              <div>
+                <span>精度 : <span>10</span> </span><span>等级 : 6</span><span>损坏 : 10%</span><span>射速 : 750</span><span>基础伤害 : 18</span>
+                <span>附加伤害 : 5</span><span>重量 : 8</span>
+              </div>
+          </div>
+          <div  className={style.right}>
+              <pre>
+              猫头鹰眼周的羽毛呈辐射状，细羽的排列形成脸盘，
+              面形似猫，因此得名为猫头鹰。它周身羽毛大多为褐色，
+              散缀细斑，稠密而松软，飞行时无声。
+              猫头鹰的雌鸟体形一般较雄鸟为大。头大而宽，
+              嘴短，侧扁而强壮，先端钩曲，嘴基没有蜡膜，
+              而且多被硬羽所掩盖。与很多肉食动物一样，
+              猫头鹰的眼睛位于面部的正前方，这让它们在捕猎过程中拥有出色的深度感知能力，
+              尤其是在光线暗淡的环境下。有意思的是，大大的眼睛被固定在猫头鹰的眼窝里，
+              根本无法转动，所以猫头鹰要不停地转动它的脑袋。它们还有一个转动灵活的脖子，
+              使脸能转向后方，由于特殊的颈椎结构，头的活动范围为270°。左右耳不对称，
+              左耳道明显比右耳道宽阔，且左耳有发达的耳鼓。大部分还生有一簇耳羽，
+              形成像人一样的耳廓。听觉神经很发达。一个体重只有300克的仓鸮约有9.5万个听觉神经细胞，
+              而体重600克左右的乌鸦却只有2.7万个。暗，不能辨别细节和颜色）非常丰富，却不含视锥细胞
+              （在强光刺激下方会被激活，有三种视觉色素，能辨细节和颜色），以至眼内成圆柱状（而非球状
+              ），对弱光也有良好的敏感性，适合夜间活动。
+              </pre>
+          </div>
       </div>
     )
   }

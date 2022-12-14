@@ -2,7 +2,7 @@
 
 .loading{
     @include commonStyle(absolute,100%,100%);
-    background-color: rgba(0, 0, 0, 0.33);
+    background-color: #2f3640;
 }
 .common{
     @include commonStyle(absolute,10vw,10vw);
