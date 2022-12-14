@@ -6,7 +6,8 @@ import Loading from './components/Loading'
 function App() {
 
   const allRoute = useRoutes(routes);
-  
+
+
   return (
     <div className="App">
       <Suspense fallback={<Loading/>}>

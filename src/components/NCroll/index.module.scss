@@ -1,0 +1,33 @@
+@import '../../commonScss/common.scss';
+.body{
+    @include commonStyle(relative,auto,18px);
+    cursor: default;
+    font-size: 16px;
+    overflow: hidden;
+    display: inline-block;
+    span{
+        @include commonStyle(relative,8px,auto);
+        writing-mode:vertical-lr;
+        text-orientation:upright;
+        left: -7.5px;
+        transition: 0.1s;
+    }
+    
+    @for $i from 0 through 9{
+        @include keyframes(scroll-#{$i}){
+            0%{
+                transform: translateY(0);
+            }
+            100%{
+                transform: translateY(#{-10%*$i});
+            }
+        }
+
+        span[data-number='#{$i}']{
+            animation: scroll-#{$i} 0.5s linear forwards;
+        }
+    }
+}
+
+
+

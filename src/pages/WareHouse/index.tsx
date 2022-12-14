@@ -1,15 +1,58 @@
 import React from 'react'
+import pubsub from 'pubsub-js'
+import Thing from '../../components/Thing';
+import ThreeD from '../../components/ThreeD';
 import style from './index.module.scss'
+import NCroll from '../../components/NCroll';
+
 export default function WareHouse() {
 
+  //仓库总大小
   let [boxSize,setBoxSizeFn]:[Array<number>,Function] = React.useState(new Array(720).fill(0));
+  //仓库已有大小
   let [hasboxSize,setHasBoxSizeFn]:[number,Function] = React.useState(360);
-  let [wallt,setWallt]:[Array<number>,Function] = React.useState(new Array(80).fill(0));
+  //口袋总大小
+  let [wallt,setWallt]:[Array<number>,Function] = React.useState(new Array(32).fill(0));
+  //口袋已有大小
   let [hasWallt,setHasWallt]:[number,Function] = React.useState(16);
+  //保险箱总大小
   let [insurance,setInsurance]:[Array<number>,Function] = React.useState(new Array(16).fill(0));
+  //保险箱已有大小
   let [hasInsurance,setHasInsurance]:[number,Function] = React.useState(8);
+  //展示物品细节的个数
+  let [hasInfoDiv,setHasInfoDiv]:[Array<number>,Function] = React.useState([]);
+  //用来存储showinfo对象的id对应hasInfoDiv数组的索引
+  let saveIndexMap = new Map();
+
+  React.useEffect(()=>{
+    pubsub.subscribe('showInfo',(_:unknown,item:any)=>{
+      //如果找不到这个物品，则添加
+      if (!saveIndexMap.get(item.id)) {
+        saveIndexMap.set(item.id,hasInfoDiv.length);
+        setHasInfoDiv([...hasInfoDiv,item]);
+      }
+    })
+    pubsub.subscribe('decreseInfo',(_:unknown,item:any)=>{
+      let removeIndex = saveIndexMap.get(item.id);
+      console.log(saveIndexMap)
+      console.log(removeIndex);
+      let newInfo = hasInfoDiv.slice(0,removeIndex-1).concat(hasInfoDiv.slice(removeIndex));
+      console.log(newInfo);
+      setHasInfoDiv(newInfo);
+    })
+
+  },[])
+
+
+
+
   return (
     <div className={style.body}>
+      {
+        hasInfoDiv.map((item,key)=>{
+          return <ThreeD key={key}></ThreeD>;
+        })
+      }
       <div className={style.title}>WareHouse //仓库</div>
       <div className={style.main}>
         <div className={style.left}>
@@ -63,21 +106,21 @@ export default function WareHouse() {
           {/* 状态栏 */}
           <div>
              <br />
-             <span style={{fontSize:3+'vh',fontWeight: 800}}>主要状态</span>
+             <span style={{fontSize:25+'px',fontWeight: 800}}>主要状态</span>
              <br /><br />
-            <span>生命值💖 :  100 / 100</span> 
+            <span>生命值💖 :  <NCroll num={100} size={18}/> / <NCroll num={100} size={18}/></span> 
             <br />
-            <span>辐射值🧠 :  100 / 100</span> 
+            <span>辐射值🧠 :  <NCroll num={100} size={18}/> / <NCroll num={100} size={18}/></span> 
             <br />
-            <span>饱腹感🍖 :  100 / 100</span> 
+            <span>饱腹感🍖 :  <NCroll num={100} size={18}/> / <NCroll num={100} size={18}/></span> 
             <br />
-            <span>含水量💦 :  100 / 100</span> 
+            <span>含水量💦 :  <NCroll num={100} size={18}/> / <NCroll num={100} size={18}/></span> 
             <br />
-            <span>负重值🦾 :  100 / 100</span> 
+            <span>负重值🦾 :  <NCroll num={100} size={18}/> / <NCroll num={100} size={18}/></span> 
             <br /><br />
-            <span style={{fontSize:3+'vh',fontWeight: 800}}>其他状态</span>
+            <span style={{fontSize:25+'px',fontWeight: 800}}>其他状态</span>
             <br /><br />
-            <span>耐力🏀 : Lv1</span> <span className={style.allprocess}><span className={style.hasprocess}>60%</span></span>
+            <span>耐力🏀 : Lv1</span> <span className={style.allprocess}><span className={style.hasprocess}></span></span>
             <br />
             <span>力量💪 : Lv1</span> <span className={style.allprocess}><span className={style.hasprocess}></span></span>
             <br />
@@ -115,16 +158,12 @@ export default function WareHouse() {
             {/* 主武器 */}
             <div>
               <span>主武器__连发 弹匣:30发__5.56__满</span>
-              <div className={style.firstWeapon}>
-                <img src="./picture/things/weapon/AK-47After.png" alt="武器" />
-              </div>
+              <Thing/>
             </div>
             {/* 副武器 */}
             <div>
               <span>副武器__单发 弹匣:30发__5.56__满</span>
-              <div className={style.secondWeapon}>
-
-              </div>
+              <Thing/>
             </div>
           </div>
 
@@ -135,16 +174,14 @@ export default function WareHouse() {
               {
                 wallt.map((item,index)=>{
                   if (index < hasWallt) {
-                    return <div className={style.grid} data-place={true}></div>
+                    return <div className={style.grid} data-place={true} key={index}></div>
                   }
                   else{
-                    return <div className={style.grid} data-place={false}></div>
+                    return <div className={style.grid} data-place={false} key={index}></div>
                   }
                 })
               }
-              <div className={style.text}>
-                <img src="./picture/things/weapon/AK-47After.png" alt="武器" />
-              </div>
+              <Thing/>
             </div>
           </div>
 
@@ -160,10 +197,10 @@ export default function WareHouse() {
               {
                 insurance.map((item,index)=>{
                   if (index < hasInsurance) {
-                    return <div className={style.grid} data-place={true}></div>
+                    return <div className={style.grid} data-place={true} key={index}></div>
                   }
                   else{
-                    return <div className={style.grid} data-place={false}></div>
+                    return <div className={style.grid} data-place={false} key={index}></div>
                   }
                 })
               }
@@ -171,15 +208,17 @@ export default function WareHouse() {
           </div>
 
         </div>
+        {/* 仓库 */}
         <div className={style.right}>
             <div className={style.contain}>
+            <Thing/>
               {
                 boxSize.map((item,index)=>{
                   if (index < hasboxSize) {
-                    return <div className={style.grid} data-place={true}></div>
+                    return <div className={style.grid} data-place={true} key={index}></div>
                   }
                   else{
-                    return <div className={style.grid} data-place={false}></div>
+                    return <div className={style.grid} data-place={false} key={index}></div>
                   }
                 })
               }
