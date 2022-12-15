@@ -41,7 +41,84 @@ export default function WareHouse() {
       setHasInfoDiv(newInfo);
     })
 
-  },[])
+  },[]);
+
+
+  // 拖拽相关
+  //用来处理欲接收元素携带的数据信息 -- 用于接收容器
+  function dropHandler(ev:any){
+    const box = 59.5;
+    const maxXcount = 12;
+    const maxYcount = 30;
+    //阻止默认行为
+    ev.preventDefault();
+    //获得数据
+    let data = ev.dataTransfer.getData("id");
+    let loc = ev.dataTransfer.getData("leftTopPoint");
+    let PP = ev.dataTransfer.getData("eleCount");
+    let mouseRelLocation = ev.dataTransfer.getData("mouseRelLocation");
+    //拖拽元素所占的格子
+    let [PXcount,PYcount] = [Number(PP.split(',')[0]),Number(PP.split(',')[1])];
+    //TX,TY表示鼠标在拖拽元素中的位置
+    let [TX,TY] = [Number(loc.split(',')[0]),Number(loc.split(',')[1])];
+    //MX,MY鼠标相对位置
+    let [MX,MY] = [Number(mouseRelLocation.split(',')[0]),Number(mouseRelLocation.split(',')[1])];
+    // console.log([TX,TY])
+    //接收元素距离左侧的距离
+    let evtaroffsetLeft = ev.target.offsetLeft;
+    //接收元素距离上侧的距离
+    let evtaroffsetTop = ev.target.offsetTop;
+    //当前鼠标左侧距离
+    let pageX = ev.pageX;
+    //当前鼠标右侧距离
+    let pageY = ev.pageY;
+    //CX,CY表示鼠标在接收元素中的位置
+    let [CX,CY] = [pageX - evtaroffsetLeft,pageY - evtaroffsetTop];
+    // RX,RY表示拖拽元素左顶点位于接收元素中的位置
+    let [RX,RY] = [CX-TX,CY-TY];
+
+    //当前位置网格约束
+    let Xcount = Math.floor(RX/box);
+    let Ycount = Math.floor(RY/box);
+    // 如果小于0 或者 大于最大值
+    // if (Xcount<0||Xcount+PXcount>=maxXcount) {
+    //   return false;
+    // }
+    // if (Ycount<0||Ycount+PYcount>=maxYcount) {
+    //   return false;
+    // }
+    //真正位置
+    // let [RealX,RealY] = [box*Xcount,box*Ycount];
+    console.log("============");
+
+    console.dir(ev.target.parentElement.parentElement.scrollTop);
+    console.log("拖拽元素所占的格子XY",[PXcount,PYcount]);
+    console.log("鼠标在拖拽元素中的位置XY",[TX,TY]);
+    console.log("接收元素距离左侧/上侧的距离",[evtaroffsetLeft,evtaroffsetTop]);
+    console.log("当前鼠标左侧/上侧距离",[pageX,pageY]);
+    console.log("鼠标在接收元素中的位置",[CX,CY]);
+    console.log("拖拽元素左顶点位于接收元素中的位置",[RX,RY]);
+    console.log("当前位置网格约束",[Xcount,Ycount]);
+    console.log("测试",ev.target.scrollTop);
+    // console.log("真正位置:",[RealX,RealY]);
+    let ele = document.getElementById(data)!;
+    ele.style.left = -Math.floor(MX/box)*box + 'px';
+    //减去滚动距离 ev.target.parentElement.parentElement.scrollTop
+    ele.style.top = -Math.floor(MY/box)*box - Math.round(ev.target.parentElement.parentElement.scrollTop/box)*box + 'px';
+    ev.target.appendChild(ele);
+  }
+
+  // -- 用于接收容器  当某被拖动的对象在另一对象容器范围内拖动时触发此事件350ms
+  function dragOverHandler(ev:any){
+        //阻止默认行为
+        ev.preventDefault();
+        // console.log(ev.target);
+        //设置放置效果
+        ev.dataTransfer.dropEffect = "move"
+  }
+
+
+
 
 
 
@@ -158,19 +235,19 @@ export default function WareHouse() {
             {/* 主武器 */}
             <div>
               <span>主武器__连发 弹匣:30发__5.56__满</span>
-              <Thing/>
+              <Thing tid={2}/>
             </div>
             {/* 副武器 */}
             <div>
               <span>副武器__单发 弹匣:30发__5.56__满</span>
-              <Thing/>
+              <Thing tid={3}/>
             </div>
           </div>
 
           {/* 口袋栏 */}
           <div>
             <span>口袋栏</span>
-            <div className={style.walletContain}>
+            <div className={style.walletContain} onDrop={dropHandler} onDragOver={dragOverHandler}>
               {
                 wallt.map((item,index)=>{
                   if (index < hasWallt) {
@@ -181,7 +258,7 @@ export default function WareHouse() {
                   }
                 })
               }
-              <Thing/>
+              <Thing tid={4}/>
             </div>
           </div>
 
@@ -210,8 +287,9 @@ export default function WareHouse() {
         </div>
         {/* 仓库 */}
         <div className={style.right}>
-            <div className={style.contain}>
-            <Thing/>
+            <div className={style.contain} onDrop={dropHandler} onDragOver={dragOverHandler}> 
+            <Thing tid={1}/>
+
               {
                 boxSize.map((item,index)=>{
                   if (index < hasboxSize) {

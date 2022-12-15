@@ -2,7 +2,6 @@
 @include scrollbar;
 
 .body {
-    @include commonStyle(absolute, 950px, 520px);
     @include commonLocation(0, 0, 0, 0);
     margin: auto;
     background-color: #2f3640;
@@ -12,13 +11,17 @@
     z-index: 100;
     animation: scale-in-ver-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
+.body[data-isRightShow=true]{
+    @include commonStyle(absolute, 950px, 520px);
+}
+.body[data-isRightShow=false]{
+    @include commonStyle(absolute, 600px, 520px);
+}
 
 .left {
     @include commonStyle(relative, 600px, 98%);
     margin: 5px;
     border-radius:15px;
-    
-    // background-color: slategrey;
     
     > :nth-of-type(1) {
         @include commonStyle(relative, 100%, 320px);
@@ -78,6 +81,47 @@
     }
 }
 
+.rightShowBut{
+    @include commonStyle(absolute, 40px,30px);
+    font-size: 40px;
+    font-weight: bolder;
+    border: 0;
+    background-color: rgba(0,0,0,0);
+    transition: 0.2s;
+    cursor: pointer;
+}
+.rightShowBut[data-isRightShow=true] {
+    transform: rotate(0);
+    top: -15px;
+    right: 0;
+    color: snow;
+    -webkit-text-stroke: 3px fade-out(seagreen, 0);
+
+    &:hover {
+        top: -10px;
+        right: -5px;
+        transform: rotate(45deg);
+        color: red;
+        -webkit-text-stroke: 3px fade-out(snow, 0);
+    }
+}
+.rightShowBut[data-isRightShow=false]{
+    top: -10px;
+    right: -5px;
+    transform: rotate(45deg);
+    color: red;
+    -webkit-text-stroke:3px fade-out(snow, 0);
+    &:hover{
+        transform: rotate(0);
+        top: -15px;
+        right: 0;
+        color: snow;
+        -webkit-text-stroke:3px fade-out(seagreen, 0);
+    }
+}
+
+
+
 .right {
     @include commonStyle(relative, auto, 93.5%);
     flex: 1;
@@ -95,12 +139,31 @@
     text-indent: 2em;
     overflow: auto;
     border-radius:15px;
+    transition: 0.33s;
     pre{
         font-family: chi;
         white-space: pre-wrap;
         word-wrap: break-word;
     }
 }
+
+.right[data-isRightShow=true]{
+    flex: 1;
+    margin: 5px;
+    padding: 10px;
+    padding-right: 8px;
+    // font-size: 14px;
+    opacity: 1;
+}
+.right[data-isRightShow=false]{
+    flex: 1;
+    margin: 0;
+    padding: 0;
+    padding-right: 0;
+    // font-size: 0;
+    opacity: 0;
+}
+
 
 .container {
     @include commonStyle(relative, 100%, 320px);
@@ -163,7 +226,8 @@
         opacity: 1;
     }
     >div{
-        @include commonStyle(relative, 59px, 59px);
+        @include commonStyle(relative, 59.5px, 59.5px);
+        left: 3px;
         margin-right: 5px;
         border: 2px solid #a1b7d3;
         margin-top: 10px;

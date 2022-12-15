@@ -11,6 +11,22 @@ import NCroll from '../NCroll';
 export default class ThreeD extends Component {
 
 
+    state = {
+      //使用我封装的3D 还是 iframe引入 ？
+      isMyThreeD : false,
+      //右侧是否展开
+      isRightShow: true,
+    }
+
+    changeRightShow = ()=>{
+      if (this.state.isRightShow) {
+        this.setState({isRightShow:false});
+      }
+      else{
+        this.setState({isRightShow:true});
+      }
+    }
+
     //使用我封装的3D 还是 iframe引入 ？
     isMyThreeD = false;
 
@@ -143,7 +159,7 @@ export default class ThreeD extends Component {
     }
   render() {
     return (
-      <div className={style.body} data-level={4}>
+      <div className={style.body} data-level={4} data-isrightshow={this.state.isRightShow}>
         <button className={style.quit} onClick={this.unmountThis}> X </button>
         <div className={style.move}> ↖ </div>
           <div className={style.left}>
@@ -168,11 +184,14 @@ export default class ThreeD extends Component {
                   // execution-while-out-of-viewport  = {true}
                   // execution-while-not-rendered = {true}
                   // web-share  = {true}
-                  src="https://sketchfab.com/models/a16768f0ffa24737a4fe324a411cfbd9/embed?autostart=1"> 
+                  src="https://sketchfab.com/models/17c8ff1b23204de4a69f74b6527d6eab/embed?autostart=1"> 
                  </iframe>
                 }
               </div>
-              <div><span className={style.levelSpan} data-level={4}>MP5</span></div>
+              <div>
+                <span className={style.levelSpan} data-level={4}>MP5</span>
+                <button onClick={this.changeRightShow} className={style.rightShowBut} data-isrightshow={this.state.isRightShow}>+</button>
+              </div>
               <div>
                 <span>精度 : <NCroll num={10} key={1} /> </span>
                 <span>等级 : <NCroll num={6} key={2} /></span>
@@ -183,7 +202,7 @@ export default class ThreeD extends Component {
                 <span>重量 : <NCroll num={8} key={7}/></span>
               </div>
           </div>
-          <div  className={style.right}>
+          <div  className={style.right} data-isrightshow={this.state.isRightShow}>
               <pre>
               猫头鹰眼周的羽毛呈辐射状，细羽的排列形成脸盘，
               面形似猫，因此得名为猫头鹰。它周身羽毛大多为褐色，
