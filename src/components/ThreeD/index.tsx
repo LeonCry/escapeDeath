@@ -6,11 +6,35 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import Galaxy from "../../skybox/acc.jpg";
 import NCroll from '../NCroll';
+import Thing from '../Thing'
+
+interface items{
+  tid:string,
+  wid:number,
+  hei:number,
+  src:string,
+  lv:number,
+  tname:string,
+  ttype:string,
+  dsrc:string
+}
+interface things{
+  things:items,
+}
+
+interface Iprops{
+  items:things
+}
 
 
-export default class ThreeD extends Component {
 
+export default class ThreeD extends Component<Iprops> {
 
+  //props上的item
+
+    item = this.props.items.things;
+    divMoveRef = React.createRef<HTMLDivElement>();
+    moveRef = React.createRef<HTMLDivElement>();
     state = {
       //使用我封装的3D 还是 iframe引入 ？
       isMyThreeD : false,
@@ -148,48 +172,99 @@ export default class ThreeD extends Component {
     }
 
     //卸载本组件
-    unmountThis(){
-        pubsub.publish('decreseInfo',{id:1});
+    unmountThis(tid:string):void{
+        pubsub.publish('decreseInfo',{tid:tid});
     }
 
     componentDidMount(): void {
       if (this.isMyThreeD) {
         this.createThreeD();
       }
+      const _t = this;
+      this.moveRef.current!.onmousedown = function(e){
+        let oleft = e.offsetX;
+	      let otop = e.offsetY;
+        document.onmousemove = function(e){
+          var left = e.clientX-oleft;
+          var top = e.clientY-otop;
+          _t.divMoveRef.current!.style.left = left  + "px";
+          _t.divMoveRef.current!.style.top = top  + "px";
+        }
+      }
+      this.moveRef.current!.onmouseup = function(){
+        document.onmousemove = null;
+      }
     }
+
+    
+//用来处理欲接收元素携带的数据信息 -- 用于接收容器---武器/左侧装备
+ weaponDropHandler(ev: any) {
+  //阻止默认行为
+  ev.preventDefault();
+  console.log("first")
+  if (ev.target.dataset.sign===undefined) {
+    return false;
+  }
+  //获得数据
+  let data = ev.dataTransfer.getData("id");
+  let ele = document.getElementById(data)!;
+  ele.style.left = '0';
+  ele.style.top = '0';
+  ev.target.appendChild(ele);
+}
+// -- 用于接收容器  当某被拖动的对象在另一对象容器范围内拖动时触发此事件350ms
+ dragOverHandler(ev: any) {
+    //阻止默认行为
+    ev.preventDefault();
+    console.log(ev)
+    ev.onkeydown = function(e:any){
+        console.log(e);
+    }
+    // console.log(ev.target);
+    //设置放置效果
+    ev.dataTransfer.dropEffect = "move";
+}
+
+
+  test = {tid:31,wid:1,hei:1,lv:1,src:'./picture/things/weapon/sight.png',tname:'单倍',ttype:'瞄准镜',dsrc:'https://sketchfab.com/models/9e06921807da4dde9d77596dc58ed8f2/embed'};
+
+
+
   render() {
     return (
-      <div className={style.body} data-level={4} data-isrightshow={this.state.isRightShow}>
-        <button className={style.quit} onClick={this.unmountThis}> X </button>
-        <div className={style.move}> ↖ </div>
+      <div className={style.body} data-level={this.item.lv} data-isrightshow={this.state.isRightShow} ref={this.divMoveRef}>
+        <button className={style.quit} onClick={()=>{this.unmountThis(this.item.tid)}}> X </button>
+        <div className={style.move} ref={this.moveRef}> </div>
           <div className={style.left}>
               <div>
-                {/* 配件 */}
-                <div className={style.aided}>
-                  <div>瞄准镜</div>
-                  <div>枪管</div>
-                  <div>激光瞄准</div>
-                  <div>弹匣</div>
-                  <div>枪托</div>
-                  <div>握把</div>
+                                {/* 配件 */}
+                <div className={style.aided} data-level={this.item.lv}>
+                  <div onDrop={this.weaponDropHandler} onDragOver={this.dragOverHandler} data-sign={'dep'}>瞄准镜</div>
+                  <div onDrop={this.weaponDropHandler} onDragOver={this.dragOverHandler} data-sign={'dep'}>枪管</div>
+                  <div onDrop={this.weaponDropHandler} onDragOver={this.dragOverHandler} data-sign={'dep'}>激光</div>
+                  <div onDrop={this.weaponDropHandler} onDragOver={this.dragOverHandler} data-sign={'dep'}>弹匣</div>
+                  <div onDrop={this.weaponDropHandler} onDragOver={this.dragOverHandler} data-sign={'dep'}>枪托</div>
+                  <div onDrop={this.weaponDropHandler} onDragOver={this.dragOverHandler} data-sign={'dep'}>握把</div>
                 </div>
                 {
                   this.isMyThreeD?<div className={style.container} id='container'></div>:
                   <iframe
                   title='xxx'
                   frameBorder={0}
+                  className={style.iframe}
                   // allowFullScreen = {true}
                   // allow="autoplay; fullscreen; xr-spatial-tracking" 
                   // xr-spatial-tracking = {true}
                   // execution-while-out-of-viewport  = {true}
                   // execution-while-not-rendered = {true}
                   // web-share  = {true}
-                  src="https://sketchfab.com/models/17c8ff1b23204de4a69f74b6527d6eab/embed?autostart=1"> 
+                  src= {this.item.dsrc + "?autostart=1"}> 
                  </iframe>
                 }
               </div>
+              
               <div>
-                <span className={style.levelSpan} data-level={4}>MP5</span>
+                <span className={style.levelSpan} data-level={this.item.lv}>{this.item.tname}</span>
                 <button onClick={this.changeRightShow} className={style.rightShowBut} data-isrightshow={this.state.isRightShow}>+</button>
               </div>
               <div>
@@ -202,23 +277,9 @@ export default class ThreeD extends Component {
                 <span>重量 : <NCroll num={8} key={7}/></span>
               </div>
           </div>
-          <div  className={style.right} data-isrightshow={this.state.isRightShow}>
+          <div  className={style.right} data-isrightshow={this.state.isRightShow} >
               <pre>
-              猫头鹰眼周的羽毛呈辐射状，细羽的排列形成脸盘，
-              面形似猫，因此得名为猫头鹰。它周身羽毛大多为褐色，
-              散缀细斑，稠密而松软，飞行时无声。
-              猫头鹰的雌鸟体形一般较雄鸟为大。头大而宽，
-              嘴短，侧扁而强壮，先端钩曲，嘴基没有蜡膜，
-              而且多被硬羽所掩盖。与很多肉食动物一样，
-              猫头鹰的眼睛位于面部的正前方，这让它们在捕猎过程中拥有出色的深度感知能力，
-              尤其是在光线暗淡的环境下。有意思的是，大大的眼睛被固定在猫头鹰的眼窝里，
-              根本无法转动，所以猫头鹰要不停地转动它的脑袋。它们还有一个转动灵活的脖子，
-              使脸能转向后方，由于特殊的颈椎结构，头的活动范围为270°。左右耳不对称，
-              左耳道明显比右耳道宽阔，且左耳有发达的耳鼓。大部分还生有一簇耳羽，
-              形成像人一样的耳廓。听觉神经很发达。一个体重只有300克的仓鸮约有9.5万个听觉神经细胞，
-              而体重600克左右的乌鸦却只有2.7万个。暗，不能辨别细节和颜色）非常丰富，却不含视锥细胞
-              （在强光刺激下方会被激活，有三种视觉色素，能辨细节和颜色），以至眼内成圆柱状（而非球状
-              ），对弱光也有良好的敏感性，适合夜间活动。
+              猫头鹰眼周的羽毛呈辐射状，细羽的排列形成脸盘，面形似猫，因此得名为猫头鹰。它周身羽毛大多为褐色，散缀细斑，稠密而松软，飞行时无声。
               </pre>
           </div>
       </div>

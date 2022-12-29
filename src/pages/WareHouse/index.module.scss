@@ -58,7 +58,7 @@ $boxHColor:slateblue;
         background-color:rgba(48, 48, 48, 1);
     }
     img{
-        @include commonStyle(relative,auto,100%);
+        @include commonStyle(relative,100%,100%);
         object-fit: cover;
     }
 }
@@ -80,92 +80,88 @@ $boxHColor:slateblue;
         width: 100%;
         height: 13%;
         > :nth-child(1){
-            left: 15%;
+            @include commonStyle(relative,60px,60px);
         }
         > :nth-child(2){
-            left: 20%;
+            left: 25%;
         }
         > :nth-child(3){
-            left: 25%;
+            @include commonStyle(relative,60px,60px);
+            left: 50%;
         }
     }
     > :nth-of-type(3){
         width: 100%;
         height: 13%;
-        > :nth-child(1){
-            left: 20%;
-        }
-        > :nth-child(2){
-            left: 20%;
-        }
-        > :nth-child(3){
-            left: 20%;
-        }
     }
     > :nth-of-type(4){
         width: 100%;
         height: 13%;
         > :nth-child(1){
-            left: 10%;
-        }
-        > :nth-child(2){
-            top: 30%;
-            left: 20%;
-        }
-        > :nth-child(3){
-            left: 30%;
+            @include commonStyle(relative,240px,180px);
+            left: 25%;
+            top: -50%;
         }
     }
     > :nth-of-type(5){
         width: 100%;
         height: 13%;
+        top: -8%;
         > :nth-child(2){
-            left: 60%;
+            left: 50%;
         }
     }
     > :nth-of-type(6){
         width: 100%;
         height: 13%;
+        top: -2.5%;
         > :nth-child(1){
-            left: 30%;
+            @include commonStyle(relative,120px,180px);
+            left: 24%;
         }
         > :nth-child(2){
-            left: 30%;
+            @include commonStyle(relative,120px,180px);
+            left: 26%;
         }
     }
     > :nth-of-type(7){
         width: 100%;
         height: 13%;
-        > :nth-child(1){
-            left: 28%;
-        }
-        > :nth-child(2){
-            left: 32%;
-        }
     }
     > :nth-of-type(8){
         width: 100%;
         height: 10%;
         > :nth-child(1){
-            left: 26%;
+            top: -15%;
+            @include commonStyle(relative,120px,120px);
+            left: 24%;
         }
         > :nth-child(2){
-            left: 34%;
+            top: -15%;
+            @include commonStyle(relative,120px,120px);
+            left: 26%;
         }
     }
 }
 .equment{
-    @include commonStyle(relative,10vh,10vh);
+    @include commonStyle(relative,120px,120px);
     background-color: fade-out($boxColor, 0.77);
     display: inline-block;
     border: 1px $boxColor solid;
     transition: 0.22s;
     text-align: center;
-    margin: 5px;
+    // margin: 5px;
+    overflow: hidden;
     &:hover{
         background-color: fade-out($boxHColor, 0.77);
         border: 1px $boxHColor dashed;
     }
+    // >div{
+    //     @include commonStyle(relative,120px,120px);
+    //     >img{
+    //         @include commonStyle(relative,120px,120px);
+    //     }
+    // }
 }
 
 .mid{
@@ -207,65 +203,45 @@ $boxHColor:slateblue;
         }
      }
      > :nth-of-type(2){
-        @include commonStyle(relative,90%,320px);
+        @include commonStyle(relative,90%,150px);
         color: fade-out(darkgray,0.5);
+        overflow: hidden;
         font-weight: 100;
-        > :nth-of-type(1){
-            @include commonStyle(relative,100%,158px);
-            border-bottom: 2px solid slategray;
-            transition: 0.22s;
-            div{
-                @include commonStyle(relative,90%,120px);
-                margin-top: 10px;
-                left: 5%;
-                border: salmon dotted 1px;
-                transition: 0.22s;
-                &:hover{
-                    // background-color: fade-out(salmon,0.8);
-                    border: salmon solid 1px;
-                }
-                img{
-                    @include commonStyle(absolute,100%,100%);
-                    object-fit: cover;
-                }
-            }
-        }
-        > :nth-of-type(2){
-            @include commonStyle(relative,100%,158px);
-            border-top: 2px solid slategray;
-            transition: 0.22s;
-            div{
-                @include commonStyle(relative,90%,120px);
-                margin-top: 10px;
-                left: 5%;
-                border: salmon dotted 1px;
-                transition: 0.22s;
-                &:hover{
-                    // background-color: fade-out(salmon,0.8);
-                    border: salmon solid 1px;
-                }
-                img{
-                    @include commonStyle(absolute,100%,100%);
-                    object-fit: cover;
-                }
-            }
+        &:hover{
+            overflow: hidden;
         }
      }
      > :nth-of-type(3){
-        @include commonStyle(relative,90%,260px);
+        @include commonStyle(relative,90%,150px);
         color: fade-out(darkgray,0.5);
+        overflow: hidden;
         font-weight: 100;
-
+        &:hover{
+            overflow: hidden;
+        }
      }
      > :nth-of-type(4){
-        @include commonStyle(relative,90%,300px);
+        @include commonStyle(relative,90%,510px);
+        color: fade-out(darkgray,0.5);
+        font-weight: 100;
+        overflow: hidden;
+        &:hover{
+            overflow: hidden;
+        }
+     }
+     > :nth-of-type(5){
+        @include commonStyle(relative,90%,280px);
         color: fade-out(darkgray,0.5);
         font-weight: 100;
      }
-     > :nth-of-type(5){
-        @include commonStyle(relative,90%,140px);
+     > :nth-of-type(6){
+        @include commonStyle(relative,90%,280px);
         color: fade-out(darkgray,0.5);
         font-weight: 100;
+        overflow: hidden;
+        &:hover{
+            overflow: hidden;
+        }
      }
 }
 .hasprocess{
@@ -297,14 +273,6 @@ $boxHColor:slateblue;
 
 
 
-
-
-
-
-
-
-
-
 .right{
     @include commonStyle(relative,720px,85vh);
     min-width: 720px;
@@ -322,6 +290,7 @@ $boxHColor:slateblue;
     grid-template-columns: repeat(12,59.3px);
     grid-template-rows: repeat(60,59.3px);
 }
+
 .walletContain{
     @include commonStyle(absolute,90%,100%);
     left: 5%;
@@ -335,6 +304,22 @@ $boxHColor:slateblue;
     display: grid;
     grid-template-columns: repeat(4,59.3px);
     grid-template-rows: repeat(4,59.3px);
+}
+.weaponContaion{
+    @include commonStyle(absolute,90%,80%);
+    left: 5%;
+    border: 1px dotted orange;
+    >div{
+        @include commonStyle(absolute,100%,100%);
+    }
+}
+.backpack{
+    @include commonStyle(absolute,240px,240px);
+    left: 12.5px;
+    top: 30px;
+    >div{
+        @include commonStyle(absolute,100%,100%);
+    }
 }
 
 

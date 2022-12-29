@@ -2,8 +2,10 @@
 @include scrollbar;
 
 .body {
-    @include commonLocation(0, 0, 0, 0);
-    margin: auto;
+    // @include commonLocation(0, 0, 0, 0);
+    // margin: auto;
+    left: 250px;
+    top: 150px;
     background-color: #2f3640;
     color: white;
     display: flex;
@@ -17,7 +19,10 @@
 .body[data-isRightShow=false]{
     @include commonStyle(absolute, 600px, 520px);
 }
-
+.iframe{
+    border-radius:15px;
+    border: 2px solid #718093;
+}
 .left {
     @include commonStyle(relative, 600px, 98%);
     margin: 5px;
@@ -26,13 +31,13 @@
     > :nth-of-type(1) {
         @include commonStyle(relative, 100%, 320px);
         border-radius:15px;
-        overflow: hidden;
-        border: 2px solid #718093;
+        // overflow: hidden;
+        // border: 2px solid #718093;
     }
 
     > :nth-of-type(2) {
         @include commonStyle(relative, 100%, 30px);
-        margin-top: 10px;
+        margin-top: 14px;
         font-size: 22px;
         letter-spacing: 6px;
         font-weight: bolder;
@@ -92,13 +97,13 @@
 }
 .rightShowBut[data-isRightShow=true] {
     transform: rotate(0);
-    top: -15px;
+    top: -5px;
     right: 0;
     color: snow;
     -webkit-text-stroke: 3px fade-out(seagreen, 0);
 
     &:hover {
-        top: -10px;
+        top: -5px;
         right: -5px;
         transform: rotate(45deg);
         color: red;
@@ -106,14 +111,14 @@
     }
 }
 .rightShowBut[data-isRightShow=false]{
-    top: -10px;
+    top: -5px;
     right: -5px;
     transform: rotate(45deg);
     color: red;
     -webkit-text-stroke:3px fade-out(snow, 0);
     &:hover{
         transform: rotate(0);
-        top: -15px;
+        top: -10px;
         right: 0;
         color: snow;
         -webkit-text-stroke:3px fade-out(seagreen, 0);
@@ -131,7 +136,6 @@
     line-height: 180%;
     letter-spacing: 1px;
     text-align:justify;
-    text-align-last:justify;
     border: 2px solid #718093;
     background-color: #353b48;
     font-size: 14px;
@@ -170,19 +174,18 @@
 }
 
 .quit {
-    @include commonStyle(absolute, 30px, 30px);
+    @include commonStyle(absolute, 35px, 35px);
     right: -18px;
     top: -18px;
     cursor: pointer;
     z-index: 2;
-    background-color: black;
+    background-color: fade-out(black,0.5);
     color: white;
     font-weight: bolder;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     border-radius: 50%;
-    border: 4px solid black;
-    transition: 0.22s;
+    border: 4px double fade-out(black,0.5);
 
     &:hover {
         background-color: white;
@@ -191,19 +194,18 @@
 }
 
 .move {
-    @include commonStyle(absolute, 20px, 20px);
-    left: -18px;
-    top: -18px;
+    @include commonStyle(absolute, 30px, 30px);
+    left: -10px;
+    top: -10px;
     cursor: move;
-    z-index: 2;
-    background-color: black;
+    z-index: 12;
+    background-color: fade-out(black,0.9);
     color: white;
     font-weight: bolder;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     border-radius: 50%;
-    border: 4px solid black;
-    transition: 0.22s;
+    border: 4px double fade-out(black,0.8);
 
     &:hover {
         background-color: white;
@@ -214,10 +216,11 @@
 }
 
 .aided{
-    @include commonStyle(absolute, 75px, 100%);
-    background-color: rgba(0,0,0,0.5);
+    @include commonStyle(absolute, 75px, 155%);
+    background-color: #353b48;
     opacity: 0.5;
-    right:0;
+    left:-86.5px;
+    top: 0;
     z-index: 10;
     overflow: hidden;
     transition: 0.33s;
@@ -227,7 +230,8 @@
     }
     >div{
         @include commonStyle(relative, 59.5px, 59.5px);
-        left: 3px;
+        left: 5px;
+        margin-left: 1px;
         margin-right: 5px;
         border: 2px solid #a1b7d3;
         margin-top: 10px;
@@ -236,17 +240,25 @@
         text-align: center;
         line-height: 500%;
         font-size: 10px;
+        cursor: default;
         &:hover{
             border: 2px dotted #778beb;
         }
     }
 }
 
+
 $levelColor:white #0be881 #778beb #a55eea #EE5A24 #EA2027 #ff9ff3;
 
 @for $i from 1 through 7{
     .body[data-level='#{$i}']{
         border: 6px double nth($levelColor,$i);
+        box-shadow: 0px 0px 30px 5px nth($levelColor,$i);
+    }
+    .aided[data-level='#{$i}']{
+        border: 6px double nth($levelColor,$i);
+        border-right: none;
+        box-shadow: -20px 0px 50px 1px nth($levelColor,$i);
     }
     .levelSpan[data-level='#{$i}']{
         color: white;
