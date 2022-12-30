@@ -16,7 +16,8 @@ interface items{
   lv:number,
   tname:string,
   ttype:string,
-  dsrc:string
+  dsrc:string,
+  thisTransf:boolean
 }
 interface things{
   things:items,
@@ -40,6 +41,8 @@ export default class ThreeD extends Component<Iprops> {
       isMyThreeD : false,
       //右侧是否展开
       isRightShow: true,
+      isLeftShow:true,
+      backpackSize : new Array(50).fill(undefined),
     }
 
     changeRightShow = ()=>{
@@ -48,6 +51,14 @@ export default class ThreeD extends Component<Iprops> {
       }
       else{
         this.setState({isRightShow:true});
+      }
+    }
+    changeLeftShow = () =>{
+      if (this.state.isLeftShow) {
+        this.setState({isLeftShow:false});
+      }
+      else{
+        this.setState({isLeftShow:true});
       }
     }
 
@@ -232,10 +243,10 @@ export default class ThreeD extends Component<Iprops> {
 
   render() {
     return (
-      <div className={style.body} data-level={this.item.lv} data-isrightshow={this.state.isRightShow} ref={this.divMoveRef}>
+      <div className={style.body} data-level={this.item.lv} data-isrightshow={this.state.isRightShow} data-isleftshow={this.state.isLeftShow} ref={this.divMoveRef}>
         <button className={style.quit} onClick={()=>{this.unmountThis(this.item.tid)}}> X </button>
         <div className={style.move} ref={this.moveRef}> </div>
-          <div className={style.left}>
+          <div className={style.left} data-isleftshow={this.state.isLeftShow}>
               <div>
                                 {/* 配件 */}
                 <div className={style.aided} data-level={this.item.lv}>
@@ -278,9 +289,23 @@ export default class ThreeD extends Component<Iprops> {
               </div>
           </div>
           <div  className={style.right} data-isrightshow={this.state.isRightShow} >
-              <pre>
-              猫头鹰眼周的羽毛呈辐射状，细羽的排列形成脸盘，面形似猫，因此得名为猫头鹰。它周身羽毛大多为褐色，散缀细斑，稠密而松软，飞行时无声。
-              </pre>
+          <button onClick={this.changeLeftShow} className={style.leftShowBut} data-isleftshow={this.state.isLeftShow}>+</button>
+          <span className={style.leftshowTitle} data-isleftshow={!this.state.isLeftShow}>{this.item.tname}</span>
+            { 
+               this.item.ttype==='背包'
+               ?
+               <div className={style.contain} onDrop={this.weaponDropHandler} onDragOver={this.dragOverHandler} data-sign={'backpacks'} data-size={this.state.backpackSize.length/5}>
+                {
+                this.state.backpackSize.map((item, index) => {
+                return <div className={style.grid} data-place={true} key={index} data-sign={'backpack'}></div>
+               })
+               }
+               </div>
+               :
+               <pre>
+               猫头鹰眼周的羽毛呈辐射状，细羽的排列形成脸盘，面形似猫，因此得名为猫头鹰。它周身羽毛大多为褐色，散缀细斑，稠密而松软，飞行时无声。
+               </pre>
+            }
           </div>
       </div>
     )

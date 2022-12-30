@@ -4,16 +4,19 @@ import pubsub from 'pubsub-js'
 export default function Thing(props:any) {
     const thisThing = props.things;
     const thisId =thisThing.tid;
-    const thisWid =thisThing.wid;
-    const thisHei =thisThing.hei;
+    // const thisWid =thisThing.wid;
+    // const thisHei =thisThing.hei;
     const thisLv =thisThing.lv;
     const thisSrc = thisThing.src;
     const thisTname =thisThing.tname;
     const thisTtype =thisThing.ttype;
     const thisDsrc =thisThing.dsrc;
+    let [thisWid,setWid]:[boolean,Function] = React.useState(thisThing.wid);
+    let [thisHei,setHei]:[boolean,Function] = React.useState(thisThing.hei);
+    let [thisTransf,setTransf]:[boolean,Function] = React.useState(thisThing.transf);
     let warehouseThings:Array<any> = [];
     React.useEffect(()=>{
-      pubsub.subscribe('sendWareArr', (_: unknown, arr: Array<any>) => {
+        pubsub.subscribe('sendWareArr', (_: unknown, arr: Array<any>) => {
         warehouseThings = arr;
       })
     },[])
@@ -139,18 +142,36 @@ function  getAbsoluteY(element:any):number{
         pubsub.publish('showInfo',{things:thisThing});
     }
 
+    //显示右键按钮
+    function pubsubRight(mouseEvent:any,things:any):void {
+      pubsub.publish('showRight',{mouseEvent,things});
+  }
+
+    //右键
+    function rightShow(e:any):void{
+      pubsubRight(e,thisThing);
+      e.preventDefault();
+    }
+
     React.useEffect(()=>{
-      document.oncontextmenu = function(e){
-        console.log("stop!");
-        //点击右键后要执行的代码
-        //.......
-        // return false;//阻止浏览器的默认弹窗行为
-      }
+      //旋转 搁置
+      // pubsub.subscribe('transf', (_: unknown, thing: any) => {
+      //   if (thing.tid===thisId) {
+      //     let temp = thisHei;
+      //     thisHei = thisWid;
+      //     thisWid = temp;
+      //     thisTransf = !thisTransf;
+      //     setWid(thisWid);
+      //     setHei(thisHei);
+      //     setTransf(thisTransf);
+      //   }
+      // })
     },[])
 
 
   return (
     <div id={thisId} className={style.text}
+    onContextMenu = {(e)=>{rightShow(e)}}
      onDoubleClick={showInfo} draggable={true}
      onDragStart={dragStart}
      onDragEnd={dragEnd}
@@ -159,7 +180,7 @@ function  getAbsoluteY(element:any):number{
      data-lv={thisLv}
      >
       <span>{thisTtype}_{thisTname}</span>
-      <img  src={thisSrc} alt="pic" draggable={false}/>
+      <img src={thisSrc} alt="pic" draggable={false}/>
 
     </div>
   )

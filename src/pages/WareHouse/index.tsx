@@ -4,6 +4,7 @@ import Thing from '../../components/Thing';
 import ThreeD from '../../components/ThreeD';
 import style from './index.module.scss'
 import NCroll from '../../components/NCroll';
+import Options from '../../components/Options';
 
 interface items{
   tid:string,
@@ -13,7 +14,8 @@ interface items{
   lv:number,
   tname:string,
   ttype:string,
-  dsrc:string
+  dsrc:string,
+  thisTransf:boolean,
 }
 interface things{
   things:items,
@@ -40,24 +42,24 @@ export default function WareHouse() {
 
   //用来存放仓库物品的数组--用于初始化和上传服务器
   let [warehouseThings,setWareThings]:[Array<any>,Function] = React.useState(new Array(720).fill(undefined));
-  warehouseThings[4] = {tid:1,wid:4,hei:2,lv:4,src:'./picture/things/weapon/AK-47After.png',tname:'AK-47',ttype:'突击步枪',dsrc:'https://sketchfab.com/models/c1fa5b79ab0c42a1949506b3e0137424/embed'};
-  warehouseThings[109] = {tid:109,wid:2,hei:2,lv:7,src:'./picture/things/weapon/heads.png',tname:'三体军',ttype:'头盔',dsrc:'https://sketchfab.com/models/8fd2cf7c61cd464883632c7fce7fdf54/embed'};
-  warehouseThings[0] = {tid:0,wid:4,hei:2,lv:1,src:'./picture/things/weapon/M4A1.png',tname:'M4A1',ttype:'突击步枪',dsrc:'https://sketchfab.com/models/17c8ff1b23204de4a69f74b6527d6eab/embed'};
-  warehouseThings[24] = {tid:12,wid:4,hei:4,lv:7,src:'./picture/things/weapon/backpack.png',tname:'登山背包',ttype:'背包',dsrc:'https://sketchfab.com/models/4732564eec0542ed8b1855f381e64127/embed'};
-  warehouseThings[28] = {tid:28,wid:1,hei:1,lv:2,src:'./picture/things/weapon/chip1.png',tname:'A',ttype:'芯片',dsrc:'https://sketchfab.com/models/391d1d514d294c6db34c5e672e88c6e9/embed'};
-  warehouseThings[29] = {tid:29,wid:1,hei:1,lv:2,src:'./picture/things/weapon/chip2.png',tname:'Z',ttype:'芯片',dsrc:'https://sketchfab.com/models/7686cfc26b68477cb64d33a467c9f9bf/embed'};
-  warehouseThings[30] = {tid:30,wid:1,hei:1,lv:1,src:'./picture/things/weapon/sight.png',tname:'单倍',ttype:'瞄准镜',dsrc:'https://sketchfab.com/models/9e06921807da4dde9d77596dc58ed8f2/embed'};
-  warehouseThings[72] = {tid:72,wid:4,hei:3,lv:3,src:'./picture/things/weapon/vest.png',tname:'防弹衣',ttype:'护甲',dsrc:'https://sketchfab.com/models/5a137f96c6d54d5eab0793b96a4a638c/embed'};
-  warehouseThings[115] = {tid:115,wid:2,hei:2,lv:5,src:'./picture/things/weapon/leftHands.png',tname:'绞龙',ttype:'手套',dsrc:'https://sketchfab.com/models/a5bc047bb07e4fc8a025e59023455b62/embed'};
-  warehouseThings[117] = {tid:117,wid:2,hei:2,lv:5,src:'./picture/things/weapon/rightHands.png',tname:'玉城',ttype:'手套',dsrc:'https://sketchfab.com/models/620fd8a3b781465bb11cb7a10e30d6bc/embed'};
-  warehouseThings[80] = {tid:80,wid:2,hei:3,lv:6,src:'./picture/things/weapon/ironLeg.png',tname:'钢铁侠',ttype:'义腿',dsrc:'https://sketchfab.com/models/27ff42d128274f7889491fae7513de13/embed'};
-  warehouseThings[82] = {tid:82,wid:2,hei:3,lv:6,src:'./picture/things/weapon/futureLeg.png',tname:'未来城',ttype:'义腿',dsrc:'https://sketchfab.com/models/9aeec76be3ef4264b177886df1f407d2/embed'};
-  warehouseThings[111] = {tid:111,wid:2,hei:2,lv:1,src:'./picture/things/weapon/bugu.png',tname:'布谷',ttype:'鞋',dsrc:'https://sketchfab.com/models/3d8d249c816648288ab0e9cb307141ac/embed'};
-  warehouseThings[113] = {tid:113,wid:2,hei:2,lv:1,src:'./picture/things/weapon/bugu.png',tname:'布谷',ttype:'鞋',dsrc:'https://sketchfab.com/models/3d8d249c816648288ab0e9cb307141ac/embed'};
-  warehouseThings[40] = {tid:40,wid:4,hei:3,lv:7,src:'./picture/things/weapon/cbpk.png',tname:'赛博朋克V',ttype:'护甲',dsrc:'https://sketchfab.com/models/17813414cc7d447e9f574c4299341c93/embed'};
-  warehouseThings[44] = {tid:44,wid:4,hei:3,lv:6,src:'./picture/things/weapon/lieyan.png',tname:'赛博朋克烈焰',ttype:'护甲',dsrc:'https://sketchfab.com/models/a1be04c7ff2745e7b977fdee02d79657/embed'};
-  warehouseThings[8] = {tid:8,wid:4,hei:3,lv:5,src:'./picture/things/weapon/zfz2.png',tname:'执法者',ttype:'护甲',dsrc:'https://sketchfab.com/models/f2cb007403144ae0bc7ae2231384c5dc/embed'};
-  warehouseThings[76] = {tid:76,wid:4,hei:2,lv:4,src:'./picture/things/weapon/sword.png',tname:'玉刃',ttype:'刀剑',dsrc:'https://sketchfab.com/models/e3caffae38ff43aea3476cea700b6a00/embed'};
+  warehouseThings[4] = {tid:1,wid:4,hei:2,lv:4,src:'./picture/things/weapon/AK-47After.png',tname:'AK-47',ttype:'突击步枪',dsrc:'https://sketchfab.com/models/c1fa5b79ab0c42a1949506b3e0137424/embed',transf:false};
+  warehouseThings[109] = {tid:109,wid:2,hei:2,lv:7,src:'./picture/things/weapon/heads.png',tname:'三体军',ttype:'头盔',dsrc:'https://sketchfab.com/models/8fd2cf7c61cd464883632c7fce7fdf54/embed',transf:false};
+  warehouseThings[0] = {tid:0,wid:4,hei:2,lv:1,src:'./picture/things/weapon/M4A1.png',tname:'M4A1',ttype:'突击步枪',dsrc:'https://sketchfab.com/models/17c8ff1b23204de4a69f74b6527d6eab/embed',transf:false};
+  warehouseThings[24] = {tid:12,wid:4,hei:4,lv:7,src:'./picture/things/weapon/backpack.png',tname:'登山背包',ttype:'背包',dsrc:'https://sketchfab.com/models/4732564eec0542ed8b1855f381e64127/embed',transf:false};
+  warehouseThings[28] = {tid:28,wid:1,hei:1,lv:2,src:'./picture/things/weapon/chip1.png',tname:'A',ttype:'芯片',dsrc:'https://sketchfab.com/models/391d1d514d294c6db34c5e672e88c6e9/embed',transf:false};
+  warehouseThings[29] = {tid:29,wid:1,hei:1,lv:2,src:'./picture/things/weapon/chip2.png',tname:'Z',ttype:'芯片',dsrc:'https://sketchfab.com/models/7686cfc26b68477cb64d33a467c9f9bf/embed',transf:false};
+  warehouseThings[30] = {tid:30,wid:1,hei:1,lv:1,src:'./picture/things/weapon/sight.png',tname:'单倍',ttype:'瞄准镜',dsrc:'https://sketchfab.com/models/9e06921807da4dde9d77596dc58ed8f2/embed',transf:false};
+  warehouseThings[72] = {tid:72,wid:4,hei:3,lv:3,src:'./picture/things/weapon/vest.png',tname:'防弹衣',ttype:'护甲',dsrc:'https://sketchfab.com/models/5a137f96c6d54d5eab0793b96a4a638c/embed',transf:false};
+  warehouseThings[115] = {tid:115,wid:2,hei:2,lv:5,src:'./picture/things/weapon/leftHands.png',tname:'绞龙',ttype:'手套',dsrc:'https://sketchfab.com/models/a5bc047bb07e4fc8a025e59023455b62/embed',transf:false};
+  warehouseThings[117] = {tid:117,wid:2,hei:2,lv:5,src:'./picture/things/weapon/rightHands.png',tname:'玉城',ttype:'手套',dsrc:'https://sketchfab.com/models/620fd8a3b781465bb11cb7a10e30d6bc/embed',transf:false};
+  warehouseThings[80] = {tid:80,wid:2,hei:3,lv:6,src:'./picture/things/weapon/ironLeg.png',tname:'钢铁侠',ttype:'义腿',dsrc:'https://sketchfab.com/models/27ff42d128274f7889491fae7513de13/embed',transf:false};
+  warehouseThings[82] = {tid:82,wid:2,hei:3,lv:6,src:'./picture/things/weapon/futureLeg.png',tname:'未来城',ttype:'义腿',dsrc:'https://sketchfab.com/models/9aeec76be3ef4264b177886df1f407d2/embed',transf:false};
+  warehouseThings[111] = {tid:111,wid:2,hei:2,lv:1,src:'./picture/things/weapon/bugu.png',tname:'布谷',ttype:'鞋',dsrc:'https://sketchfab.com/models/3d8d249c816648288ab0e9cb307141ac/embed',transf:false};
+  warehouseThings[113] = {tid:113,wid:2,hei:2,lv:1,src:'./picture/things/weapon/bugu.png',tname:'布谷',ttype:'鞋',dsrc:'https://sketchfab.com/models/3d8d249c816648288ab0e9cb307141ac/embed',transf:false};
+  warehouseThings[40] = {tid:40,wid:4,hei:3,lv:7,src:'./picture/things/weapon/cbpk.png',tname:'赛博朋克V',ttype:'护甲',dsrc:'https://sketchfab.com/models/17813414cc7d447e9f574c4299341c93/embed',transf:false};
+  warehouseThings[44] = {tid:44,wid:4,hei:3,lv:6,src:'./picture/things/weapon/lieyan.png',tname:'赛博朋克烈焰',ttype:'护甲',dsrc:'https://sketchfab.com/models/a1be04c7ff2745e7b977fdee02d79657/embed',transf:false};
+  warehouseThings[8] = {tid:8,wid:4,hei:3,lv:5,src:'./picture/things/weapon/zfz2.png',tname:'执法者',ttype:'护甲',dsrc:'https://sketchfab.com/models/f2cb007403144ae0bc7ae2231384c5dc/embed',transf:false};
+  warehouseThings[76] = {tid:76,wid:4,hei:2,lv:4,src:'./picture/things/weapon/sword.png',tname:'玉刃',ttype:'刀剑',dsrc:'https://sketchfab.com/models/e3caffae38ff43aea3476cea700b6a00/embed',transf:false};
   const gunGrid: Array<number> = new Array(8).fill(0);
 
   let midRef= React.createRef<HTMLDivElement>();
@@ -304,7 +306,13 @@ export default function WareHouse() {
           return <ThreeD key={key} items={item}></ThreeD>;
         })
       }
+       <Options></Options>
       <div className={style.title}>WareHouse //仓库</div>
+      <div className={style.optation}>
+          <button>暂存区</button>
+          <button>排序</button>
+          <button>更多</button>
+        </div>
       <div className={style.main}>
         <div className={style.left}>
           <div className={style.division}>

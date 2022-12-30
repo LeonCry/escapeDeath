@@ -270,6 +270,27 @@ $boxHColor:slateblue;
         }
     }
 }
+.optation{
+    @include commonStyle(absolute,300px,85px);
+    right: 0;
+    top: 0;
+    button{
+        @include commonStyle(relative,75px,35px);
+        top: 40px;
+        margin: 2.5px;
+        border: none;
+        border-radius: 15px;
+        background-color: #706f6f;
+        color: whitesmoke;
+        transition: 0.22s;
+        &:hover{
+            cursor: pointer;
+            background-color: whitesmoke;
+            color: black;
+        }
+    }
+}
+
 
 
 
