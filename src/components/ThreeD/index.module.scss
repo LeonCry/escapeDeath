@@ -113,7 +113,7 @@
     -webkit-text-stroke: 3px fade-out(seagreen, 0);
 
     &:hover {
-        top: -5px;
+        top: -3px;
         right: -5px;
         transform: rotate(45deg);
         color: red;
@@ -121,14 +121,14 @@
     }
 }
 .rightShowBut[data-isRightShow=false]{
-    top: -5px;
+    top: -3px;
     right: -5px;
     transform: rotate(45deg);
     color: red;
     -webkit-text-stroke:3px fade-out(snow, 0);
     &:hover{
         transform: rotate(0);
-        top: -10px;
+        top: -5px;
         right: 0;
         color: snow;
         -webkit-text-stroke:3px fade-out(seagreen, 0);
@@ -169,13 +169,13 @@
     &:hover{
         transform: rotate(0);
         top: -2px;
-        right: 5px;
+        right: 15px;
         color: snow;
         -webkit-text-stroke:3px fade-out(seagreen, 0);
     }
 }
 .leftshowTitle{
-    left: 15px;
+    left: -15px;
     font-size: 18px;
     top: -2px;
     transition: 0.22s;
@@ -259,8 +259,8 @@
 
 .move {
     @include commonStyle(absolute, 30px, 30px);
-    left: -10px;
-    top: -10px;
+    left: -25px;
+    top: -25px;
     cursor: move;
     z-index: 12;
     background-color: fade-out(black,0.9);
@@ -349,6 +349,9 @@ $levelColor:white #0be881 #778beb #a55eea #EE5A24 #EA2027 #ff9ff3;
     .levelSpan[data-level='#{$i}']{
         color: white;
         -webkit-text-stroke:2px fade-out(nth($levelColor,$i), 0.4);
+    }
+    .leftshowTitle[data-level='#{$i}']{
+        color: nth($levelColor,$i);
     }
 }
 

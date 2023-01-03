@@ -1,0 +1,131 @@
+@import '../../commonScss/common.scss';
+@include scrollbarWhite;
+.body{
+    @include commonStyle(relative,100%,100%);
+    overflow: hidden;
+}
+.innerbody{
+    @include commonStyle(relative,100%,100%);
+    overflow: hidden;
+    background-image: url('../../../public/picture/setting.jpg');
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+    background-size: cover;
+    transform: scale(1.1);
+    filter: blur(5px);
+}
+.mainsetting{
+    @include commonStyle(absolute,600px,700px);
+    @include commonLocation(0,0,0,0);
+    margin: auto;
+    background-color: fade-out($color: white, $amount: 0.5);
+    text-align: center;
+    padding: 15px;
+    border: 10px double fade-out($color: whitesmoke, $amount: 0.66);
+    border-radius: 15px;
+    overflow: auto;
+    overflow-x: hidden;
+    h1{
+        @include commonStyle(relative,100%,60px);
+    }
+    > div{
+        @include commonStyle(relative,92%,40px);
+        text-align: left;
+        padding: 10px;
+        padding-left: 6%;
+        font-size: 22px;
+        color: seashell;
+        background-color: fade-out($color: black, $amount: 0.66);
+        border-radius: 15px;
+        line-height: 180%;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        transition: 0.33s;
+        &:hover{
+            background-color: fade-out($color: black, $amount: 0.5);
+            line-height: 250%;
+            font-size: 24px;
+            height: 60px;
+            >div{
+                margin-top: 10px;
+                font-size: 22px;
+                >span{
+                    line-height: 240%;
+                }
+            }
+        }
+        >div{
+            @include commonStyle(absolute,220px,40px);
+            display: inline-block;
+            right: -50px;
+            overflow: hidden;
+            // background-color: saddlebrown;
+            transition: 0.22s;
+            margin-top: 0;
+            div{
+                @include commonStyle(absolute,auto,100%);
+                text-align: left;
+                left: 0;
+                overflow: hidden;
+                transition: 0.5s;
+                >span{
+                    @include commonStyle(relative,150px,40px);
+                    color: pink;
+                    display: inline-block;
+                    font-size: 16px;
+                    line-height: 240%;
+                    overflow: hidden;
+                    text-align: center;
+                }
+            }
+            >button{
+                display: inline-block;
+                border: none;
+                background-color: rgba($color: white, $alpha: 0);
+                color: white;
+                font-size: 18px;
+                @include commonStyle(absolute,40px,100%);
+                transition: 0.22s;
+                &:hover{
+                    border-radius: 5px;
+                    font-size: 24px;
+                    color: pink;
+                    cursor: pointer;
+                    background-color: rgba($color:black,$alpha: 0.1);
+                }
+            }
+            >button:nth-of-type(1){
+                left: 0px;
+                z-index: 2;
+            }
+            >button:nth-of-type(2){
+                right: 70px;
+                z-index: 2;
+            }
+        }
+    }
+}
+.bottoms{
+    position: absolute !important;
+    width: 550px !important;
+    height: 50px !important;
+    background-color: fade-out($color: black, $amount: 1) !important;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    >button{
+        display: inline-block;
+        @include commonStyle(relative,120px,50px);
+        border-radius: 10px;
+        border: none;
+        display: inline-block;
+        background-color: rgba($color: black, $alpha: 0.4);
+        color: white;
+        font-size: 18px;
+        transition: 0.22s;
+        &:hover{
+           cursor: pointer;
+           background-color: rgba($color: seagreen, $alpha: 1);
+        }
+    }
+}

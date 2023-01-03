@@ -70,7 +70,7 @@ export default function Thing(props:any) {
       // console.log("标记",ev.target.parentElement.dataset.sign)
       setTimeout(() => {
         ev.target.style.opacity = 0.2;
-        ev.target.style.zIndex = 150;
+        ev.target.style.zIndex = -1;
       }, 0);
       //定义拖拽鼠标效果
       ev.dataTransfer.dropEffect = "move";
@@ -155,17 +155,17 @@ function  getAbsoluteY(element:any):number{
 
     React.useEffect(()=>{
       //旋转 搁置
-      // pubsub.subscribe('transf', (_: unknown, thing: any) => {
-      //   if (thing.tid===thisId) {
-      //     let temp = thisHei;
-      //     thisHei = thisWid;
-      //     thisWid = temp;
-      //     thisTransf = !thisTransf;
-      //     setWid(thisWid);
-      //     setHei(thisHei);
-      //     setTransf(thisTransf);
-      //   }
-      // })
+      pubsub.subscribe('transf', (_: unknown, thing: any) => {
+        if (thing.tid===thisId) {
+          let temp = thisHei;
+          thisHei = thisWid;
+          thisWid = temp;
+          thisTransf = !thisTransf;
+          setWid(thisWid);
+          setHei(thisHei);
+          setTransf(thisTransf);
+        }
+      })
     },[])
 
 

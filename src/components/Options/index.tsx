@@ -44,10 +44,10 @@ export default function Options() {
     }
 
     //旋转
-    // function trans(){
-    //     pubsub.publish('transf',thisThings);
-    //     setshows();
-    // }
+    function trans(){
+        pubsub.publish('transf',thisThings);
+        setshows();
+    }
 
 
 
@@ -64,7 +64,7 @@ export default function Options() {
         <button onClick={openFn}>打开</button>
         <button onClick={equitment}>装备/卸下</button>
         <button onClick={equitment}>跳蚤市场</button>
-        {/* <button onClick={trans}>旋转 90°</button> */}
+        <button onClick={trans}>旋转 90°</button>
         <button className={style.reverse} onClick={abadon}>丢弃</button>
     </div>
   )

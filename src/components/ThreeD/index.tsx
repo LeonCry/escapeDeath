@@ -198,8 +198,8 @@ export default class ThreeD extends Component<Iprops> {
         document.onmousemove = function(e){
           var left = e.clientX-oleft;
           var top = e.clientY-otop;
-          _t.divMoveRef.current!.style.left = left  + "px";
-          _t.divMoveRef.current!.style.top = top  + "px";
+          _t.divMoveRef.current!.style.left = left  +20+ "px";
+          _t.divMoveRef.current!.style.top = top  +20+ "px";
         }
       }
       this.moveRef.current!.onmouseup = function(){
@@ -290,7 +290,7 @@ export default class ThreeD extends Component<Iprops> {
           </div>
           <div  className={style.right} data-isrightshow={this.state.isRightShow} >
           <button onClick={this.changeLeftShow} className={style.leftShowBut} data-isleftshow={this.state.isLeftShow}>+</button>
-          <span className={style.leftshowTitle} data-isleftshow={!this.state.isLeftShow}>{this.item.tname}</span>
+          <span className={style.leftshowTitle} data-level={this.item.lv} data-isleftshow={!this.state.isLeftShow}>{this.item.tname}</span>
             { 
                this.item.ttype==='背包'
                ?
