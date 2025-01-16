@@ -11,8 +11,13 @@ export default function Setting() {
   const history = useNavigate();
   let defaultSettings = [
     {
-      settingName:'用户',
+      settingName:'游戏用户名',
       settingOpt:['测试用户A'],
+      settingCur:0,
+    },
+    {
+      settingName:'PolyhedronX链接用户',
+      settingOpt:['PolyhedronX'],
       settingCur:0,
     },
     {
@@ -33,6 +38,11 @@ export default function Setting() {
     {
       settingName:'游戏字幕',
       settingOpt:['开','关'],
+      settingCur:0,
+    },
+    {
+      settingName:'模型自动播放',
+      settingOpt:['是','否'],
       settingCur:0,
     },
     {

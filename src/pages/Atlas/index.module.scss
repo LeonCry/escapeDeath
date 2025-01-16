@@ -1,0 +1,283 @@
+@import '../../commonScss/common.scss';
+@include scrollbarWhite;
+.body{
+    @include commonStyle(relative,100%,100%);
+    overflow: hidden;
+}
+.innerbody{
+    @include commonStyle(relative,100%,100%);
+    overflow: hidden;
+    background-image: url('../../../public/picture/picjueg.jpg');
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+    background-size: cover;
+    transform: scale(1.1);
+    filter: blur(5px);
+}
+.mains{
+    @include commonStyle(absolute,95%,90%);
+    @include commonLocation(0,0,0,0);
+    margin: auto;
+    background-color: fade-out($color: white, $amount: 0.66);
+    text-align: center;
+    padding: 15px;
+    border: 10px double fade-out($color: whitesmoke, $amount: 0.1);
+    border-radius: 15px;
+    overflow: auto;
+    overflow-x: hidden;
+    h1{
+        @include commonStyle(relative,100%,5%);
+    }
+}
+.contains{
+    @include commonStyle(absolute,98%,90%);
+    display: flex;
+    margin-top: 0.5%;
+    justify-content: space-between;
+    >div{
+        background-color: rgba($color: white, $alpha: 0.55);
+        margin-left: 10px;
+        margin-right: 10px;
+        border-radius: 15px;
+        transition: 0.2s;
+        box-shadow: 0 0 25px 5px white;
+        border: 2px solid white;
+        &:hover{
+            background-color: rgba($color: white, $alpha: 0.66);
+        }
+    }
+    >:nth-of-type(1){
+        flex: 2;
+        overflow: auto;
+        overflow-x: hidden;
+        > div{
+            @include commonStyle(relative,80%,30px);
+            text-align: left;
+            padding: 10px;
+            padding-left: 6%;
+            cursor: pointer;
+            font-size: 20px;
+            color: seashell;
+            background-color: fade-out($color: black, $amount: 0.66);
+            border-radius: 35px;
+            line-height: 170%;
+            margin-left: 5px;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            border: 2px solid rgba($color: white, $alpha: 0.88);
+            transition: 0.33s;
+            &:hover{
+                background-color: fade-out($color: black, $amount: 0.5);
+                line-height: 190%;
+                font-size: 22px;
+                height: 40px;
+                margin-left: 9%;
+                animation: flashFrames 1.5s both ease-in-out infinite;
+            }
+        }
+        >div[data-isclick=true]{
+            height: 40px;
+            margin-left: 9%;
+            background-color: fade-out($color: slateblue, $amount: 0.66);
+            line-height: 190%;
+            font-size: 22px;
+            color: slateblue;
+            border: 2px solid fade-out($color: slateblue, $amount: 0.66);
+            position: sticky;
+        }
+    }
+    >:nth-of-type(2){
+        flex: 3;
+        overflow: auto;
+        overflow-x: hidden;
+        text-align: left;
+        >ul{
+            @include commonStyle(relative,80%,40px);
+            padding: 18px;
+            padding-left: 10%;
+            font-size: 22px;
+            color: seashell;
+            background-color: fade-out($color: black, $amount: 0.66);
+            border-radius:5px;
+            line-height: 170%;
+            margin-left: 15px;
+            overflow: hidden;
+            max-height: 90%;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            border: 2px solid rgba($color: black, $alpha: 0.33);
+            transition: 0.33s;
+            >span:nth-of-type(1){
+                @include commonStyle(relative,5%,50px);
+                transition: 0.22s;
+                display: inline-block;
+                cursor: pointer;
+                font-size: 16px;
+                padding-right: 10px;
+                top: -15px;
+            }
+            >span:nth-of-type(2){
+                @include commonStyle(relative,75%,50px);
+                display: inline-block;
+                cursor: pointer;
+            }
+            >span:nth-of-type(1)[data-isselect=true]{
+                transform: rotate(0);
+                top: -2.5px;
+            }
+            >span:nth-of-type(1)[data-isselect=false]{
+                transform: rotate(-90deg);
+            }
+            &:hover{
+                color: slateblue;
+                background-color: fade-out($color: slateblue, $amount: 0.55);
+            }
+            >li{
+                @include commonStyle(relative,70%,40px);
+                background-color: fade-out($color: black, $amount: 0.66);
+                margin-left: 15%;
+                font-size: 20px;
+                border-radius: 35px;
+                cursor: pointer;
+                color: seashell;
+                padding: 10px;
+                padding-left: 10%;
+                line-height: 200%;
+                list-style-type: circle;
+                margin-top: 10px;
+                border: 2px solid rgba($color: white, $alpha: 0.66);
+                margin-bottom: 10px;
+                transition: 0.33s;
+                &:hover{
+                    animation: flashFrames2 1.5s both ease-in-out infinite;
+                }
+            }
+            >li[data-isclick=true]{
+                background-color: fade-out($color: crimson, $amount: 0.66);
+                color: crimson;
+                list-style-type: disc;
+                border: 2px solid fade-out($color: crimson, $amount: 0.66);
+            }
+        }
+        >ul[data-isselect=true]{
+            height: auto;
+            overflow:auto;
+            background-color: fade-out($color: slateblue, $amount: 0.66);
+            color: slateblue;
+            border: 2px solid fade-out($color: slateblue, $amount: 0.66);
+
+        }
+    }
+    >:nth-of-type(3){
+        flex: 5;
+        overflow: auto;
+        text-align: center;
+        h1{
+            @include commonStyle(relative,60%,45px);
+            background-color: fade-out($color: black, $amount: 0.88);
+            border-radius: 35px;
+            display: inline-block;
+            border: 2px solid fade-out($color: black, $amount: 0.88);
+        }
+        >div:nth-of-type(1){
+            margin-top: 20px;
+            display: inline-block;
+            @include commonStyle(relative,80%,50%);
+            min-width: 760px;
+            min-height: 380px;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        >div:nth-of-type(2){
+            @include commonStyle(relative,82.5%,auto);
+            padding: 20px;
+            display: inline-block;
+            border-radius: 15px;
+            margin-top: 20px;
+            background-color: fade-out($color: black, $amount: 0.88);
+            border: 2px solid fade-out($color: black, $amount: 0.88);
+            h2{
+                text-align: left;
+                margin-bottom: 15px;
+                padding-bottom: 10px;
+                border-bottom: 2px solid fade-out($color: black, $amount: 0.88);
+            }
+            > span {
+                background-color:fade-out(slateblue,0.66);
+                @include commonStyle(relative, auto, auto);
+                color: white;
+                margin: 5px;
+                padding: 8px;
+                float: left;
+                transition: 0.2s;
+                border-radius: 10px;
+                &:hover {
+                    cursor: default;
+                    background-color: snow;
+                    color: black;
+                }
+            }
+        }
+        >div:nth-of-type(3){
+            @include commonStyle(relative,82.5%,auto);
+            padding: 20px;
+            display: inline-block;
+            border-radius: 15px;
+            margin-top: 20px;
+            background-color: fade-out($color: black, $amount: 0.88);
+            border: 2px solid fade-out($color: black, $amount: 0.88);
+            h2{
+                text-align: left;
+                margin-bottom: 15px;
+                padding-bottom: 10px;
+                border-bottom: 2px solid fade-out($color: black, $amount: 0.88);
+            }
+            pre{
+                white-space: pre-wrap;
+                word-wrap: break-word;
+                text-align: left;
+                text-indent:2em; 
+                font-size: 16px;
+            }
+        }
+
+
+
+    }
+}
+
+@include keyframes(flashFrames){
+    50%{
+        background-color: fade-out($color: black, $amount: 0.66);
+        color: seashell;
+    }
+    0%{
+        background-color: fade-out($color: slateblue, $amount: 0.66);
+        color: slateblue;
+        border: 2px solid fade-out($color: slateblue, $amount: 0.66);
+    }
+    100%{
+        background-color: fade-out($color: slateblue, $amount: 0.66);
+        color: slateblue;
+        border: 2px solid fade-out($color: slateblue, $amount: 0.66);
+    }
+}
+
+@include keyframes(flashFrames2){
+    50%{
+        background-color: fade-out($color: black, $amount: 0.66);
+        color: seashell;
+    }
+    0%{
+        background-color: fade-out($color: crimson, $amount: 0.66);
+        color: crimson;
+        border: 2px solid fade-out($color: crimson, $amount: 0.66);
+        list-style-type: disc;
+    }
+    100%{
+        background-color: fade-out($color: crimson, $amount: 0.66);
+        color: crimson;
+        border: 2px solid fade-out($color: crimson, $amount: 0.66);
+        list-style-type: disc;
+    }
+}

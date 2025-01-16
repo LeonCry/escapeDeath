@@ -115,7 +115,7 @@ export default function WareHouse() {
     //阻止默认行为
     ev.preventDefault();
 
-    // pubsub.publish("sendWareArr",warehouseThings); 
+    // pubsub.publish("sendWareArr",warehouseThings);
     //获得数据
     let data = ev.dataTransfer.getData("id");
     //获得当前元素的左顶点的位置
@@ -139,7 +139,7 @@ export default function WareHouse() {
     //   return false;
     // }
     //重叠限制将后面再弄
-    
+
 
 
 
@@ -255,7 +255,7 @@ export default function WareHouse() {
       let [CX, CY] = [pageX - evtaroffsetLeft, pageY - evtaroffsetTop];
       // RX,RY表示拖拽元素左顶点位于接收元素中的位置
       let [RX, RY] = [CX - TX, CY - TY];
-  
+
       //当前位置网格约束
       let Xcount = Math.floor(RX / box);
       let Ycount = Math.floor(RY / box);
@@ -289,7 +289,7 @@ export default function WareHouse() {
   function dragOverHandler(ev: any) {
     //阻止默认行为
     ev.preventDefault();
-    
+
     ev.onkeydown = function(e:any){
         console.log(e);
     }
@@ -351,7 +351,7 @@ export default function WareHouse() {
               <div className={style.equment} onDrop={weaponDropHandler} onDragOver={dragOverHandler} data-sign={'lef'}>右脚</div>
             </div>
           </div>
-          <img src="/picture/human.png" alt="human" />
+          <img src="/escape-from-death/picture/human.png" alt="human" />
         </div>
 
         <div className={style.mid} ref={midRef}>
@@ -411,14 +411,14 @@ export default function WareHouse() {
             {/* 主武器 */}
             <span>主武器__连发 弹匣:30发__5.56__满</span>
             <div className={style.weaponContaion} onDrop={weaponDropHandler} onDragOver={dragOverHandler} data-sign={'mid'}>
-              
+
             </div>
           </div>
           <div data-sign={'mid'}>
             {/* 副武器 */}
             <span>副武器__单发 弹匣:30发__5.56__满</span>
             <div className={style.weaponContaion} onDrop={weaponDropHandler} onDragOver={dragOverHandler} data-sign={'mid'}>
-              
+
             </div>
           </div>
 
@@ -426,7 +426,7 @@ export default function WareHouse() {
           <div>
             <span>口袋栏</span>
             <div className={style.walletContain} onDrop={IntractdropHandler} onDragOver={dragOverHandler} data-sign={'mid'}>
-            
+
               {
                 wallt.map((item, index) => {
                   if (index < hasWallt) {
@@ -476,7 +476,7 @@ export default function WareHouse() {
                 if (index < hasboxSize) {
                   if (warehouseThings[index]!==undefined) {
                     return <div className={style.grid} data-place={true} key={index} data-sign={'warehouse'}>
-                      <Thing 
+                      <Thing
                       things={warehouseThings[index]}
                       key = {warehouseThings[index].tid}/>
                     </div>

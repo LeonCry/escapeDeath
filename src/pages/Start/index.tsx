@@ -29,13 +29,13 @@ export default function Start(): React.ReactNode {
 
   return (
     <div className={style.warDiv} data-darker={isDarker}>
-      <video className={style.warVideo} data-darker={isDarker} autoPlay={true} muted={true} src='../../../video/gun1.mp4'></video>
+      <video className={style.warVideo} data-darker={isDarker} autoPlay={true} muted={true} src='/escape-from-death/video/gun1.mp4'></video>
       <div className={style.title} data-darker={isDarker}>
         <span>ESPCAE FROM DEATH</span>
       </div>
       <div className={style.login} onMouseEnter={()=>videoDarker(true)} onMouseLeave={()=>videoDarker(false)}>
         <div className={style.head}>
-          <img src='../../../head/head.jpg' alt="头像" />
+          <img src='/escape-from-death/head/head.jpg' alt="头像" />
           <br />
           <span>username</span>
           <br />

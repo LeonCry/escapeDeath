@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkescapefromdeath=self.webpackChunkescapefromdeath||[]).push([[582],{582:function(e,a,n){n.r(a),n.d(a,{default:function(){return u}});n(867);var s={},t=n(834);function u(){return(0,t.jsx)("div",{className:s.body})}}}]);
+//# sourceMappingURL=582.090db996.chunk.js.map
